@@ -458,9 +458,9 @@ public class MyLibrary {
 					
 					FileInputStream fileInputStream = new FileInputStream(file);
 					
-					// for(int readed_length=0; (readed_length=fileInputStream.read(bytes,0,bytes.length)) != -1; ){
-					// 	System.out.println("읽은바이트수 = " + readed_length); 
-					// }					
+					for(int readed_length=0; (readed_length=fileInputStream.read(bytes,0,bytes.length)) != -1; ){
+						System.out.println("읽은바이트수 = " + readed_length);
+					}
 				}else {
 					string_바이너리파일내용 = "!MyLibrary.f_check_valid(file_path)";
 				}

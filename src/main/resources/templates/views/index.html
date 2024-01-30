@@ -12,6 +12,10 @@
             .none-item {
                 display: none;
             }
+            footer {
+                position: fixed !important;
+                bottom: 0 !important;
+            }
         }
 
         .containers {
@@ -189,15 +193,16 @@
     </style>
 </head>
 <body>
-	<script>
-		param1 = {
-			method: "POST",
-			url: "/ImageReader",
-			setRequestHeader: '',
-			async: "false",
-			withCredentials: "true",
-		}
-	</script>
+    <script>
+        param1 = {
+            method: "POST",
+            url: "/ImageReader",      //protocol://hostname:port/pathname?name=value&searchparam#hash
+            setRequestHeader: '', //["요청-헤더","값"] setRequestHeader 는 for(var 키 in setRequestHeader) { xhr.setRequestHeader(키 , setRequestHeader[키]) }
+            async: "false",  //true<비동기>또는false<동기>
+            withCredentials: "true", //true<cors 일 ? 쿠키 보냄>또는false<안보냄>
+            //responseType : "text", //text또는document등..
+        }
+    </script>
 
     
 	<th:block th:replace="header :: headerFragment"></th:block>
@@ -267,7 +272,8 @@
       				window.img_s.push(img)
           		}) 	 
 
-	  			param1.send_querystring = 'name=next.png'   
+	  			param1.send_querystring = 'name=next.png'
+                console.log(param1.send_querystring);
     			param1.done_2xx_callback = ()=>{
     				for(var i=0;i<window.img_s.length;i++){
     					window.img_s[i].src = window.xmlHttpRequest.response;  	 
