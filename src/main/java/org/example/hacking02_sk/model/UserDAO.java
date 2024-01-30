@@ -85,7 +85,7 @@ public class UserDAO {
 			pstmt2.setString(2, user.getMyid());
 			pstmt2.setInt(3, 1000000);	// 초기 잔액
 			pstmt2.setString(4, "MNST");
-			pstmt2.setInt(5, Integer.parseInt(user.getMyaccpw()));
+			pstmt2.setString(5, user.getMyaccpw());
 			
 			num = pstmt2.executeUpdate();
 			return num;
