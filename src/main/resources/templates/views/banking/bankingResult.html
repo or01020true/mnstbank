@@ -3,7 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <title>결과 조회</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script th:src="@{/js/jquery-3.7.1.min.js}"></script>
+    <style>
+        @media screen and (max-width: 740px) {
+            body {
+                font-size: 1rem;
+            }
+            .container-xl {
+                font-size: 0.6rem;
+            }
+            .btn {
+                font-size: 0.5rem !important;
+                padding: 3px !important;
+            }
+            h2 {
+                font-size: 0.8rem !important;
+                margin-bottom: 0 !important;
+            }
+            td {
+                padding: 5px !important;
+            }
+        }
+    </style>
 </head>
 <body>
     <th:block th:replace="header :: headerFragment"></th:block>
