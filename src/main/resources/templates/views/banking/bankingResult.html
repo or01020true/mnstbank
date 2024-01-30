@@ -83,8 +83,8 @@
                 </tr>
                 <tr style="text-align: center; vertical-align: middle;">
                     <td>정상</td>
-                    <td th:text="${result.myacc}"></td>
-                    <td>[[${result.mysendbank}]]<br />[[${result.mysendacc}]]</td>
+                    <td th:text="${result.mysendacc}"></td>
+                    <td>[[${result.mysendbank}]]<br />[[${result.myacc}]]</td>
                     <td th:utext="${result.myaccioname}"></td>
                     <td th:text="${result.myaccbalance != 0 ? #numbers.formatInteger(result.myaccbalance, 3, 'COMMA'):'0'}"></td>
                     <td th:utext="${result.myaccmemo}"></td>

@@ -58,10 +58,10 @@ public class BankingController {
 
     @ModelAttribute("accList")
     List<Banking> accList(HttpSession session, HttpServletRequest request){
-        User user = (User)session.getAttribute("user");
+        // User user = (User)session.getAttribute("user");
         String jwt = jwtUtil.getToken(request.getCookies());
         if (jwt != null){
-            bankList = bankingMapper.myid(user.getMyid());
+            bankList = bankingMapper.myid(jwtUtil.extractUserId(jwt));
         } else {
             bankList = new ArrayList<Banking>();
         }
@@ -81,7 +81,7 @@ public class BankingController {
             HttpSession session,
             HttpServletRequest request,
             Model model){
-        User user = (User)session.getAttribute("user");
+        // User user = (User)session.getAttribute("user");
         String jwt = jwtUtil.getToken(request.getCookies());
         if (jwt == null) {
             model.addAttribute("msg", "로그인 해주세요.");
