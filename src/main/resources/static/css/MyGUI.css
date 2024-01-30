@@ -1,0 +1,33 @@
+/* <link rel="stylesheet" href="/MyLibraryAndTools/my_css/packages/MyGUI.css" /> */
+
+@charset "UTF-8";
+
+.table_class {
+	border-collapse: collapse;
+}
+
+.th_class {
+	text-align: center;
+	vertical-align: center;
+}
+
+.td_class {
+	text-align: center;
+	vertical-align: center;
+}
+
+.div_class_광고팝업배너 {
+	z-index: 99999;
+	position: absolute;
+
+}
+
+.span_class_광고팝업배너 {
+	z-index: 99999;
+	position: absolute;
+
+}
+
+.input_class_버튼 {
+	background-color: rgb(103, 153, 255); color: white; height: 1cm; 
+}

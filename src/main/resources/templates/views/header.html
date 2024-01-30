@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="kr" xmlns:th="http://thymeleaf.org">
+	<th:block th:fragment="headerFragment">
+    <script th:src="@{/js/jquery-3.7.1.min.js}"></script>
+	<script th:src="@{/js/bootstrap.js}"></script>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.css}">
+	<link rel="stylesheet" th:href="@{/css/font.css}">
+<body>
+	<nav class="navbar navbar-expand-lg navbar-dark" style="background-color: rgb(0, 118, 190)">
+		<div class="container-fluid">
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+					data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+					aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<a class="navbar-brand" href="/" style="font-size: 1.5em;">MNST</a>
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+					<li class="nav-item">
+						<a class="nav-link active" aria-current="page" href="/jsp/___NoticeBoard_List">문의게시판</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link active" aria-current="page" href="/banking/inout">이체</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link active" aria-current="page" href="/banking/acchistory">계좌조회</a>
+					</li>
+				</ul>
+				<ul class="navbar-nav navbar-right">
+					<li class="nav-item">
+						<a class="nav-link" th:text="${name}"></a>
+					</li>
+					<li class="nav-item" th:if="${name == null}">
+						<a class="nav-link" href="/member/login">로그인</a>
+					</li>
+					<li class="nav-item" th:if="${name != null}">
+						<a class="nav-link" href="/member/logout">로그아웃</a>
+					</li>
+					<li class="nav-item" th:if="${name == null}">
+						<a class="nav-link" href="/member/joinInfo">회원가입</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+</body>
+</html>

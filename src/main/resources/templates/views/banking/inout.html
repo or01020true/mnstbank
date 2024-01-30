@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html xmlns="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width", initial-scale="1">
+    <title>머니ST - 이체</title>
+	<script th:src="@{/js/jquery-3.7.1.min.js}"></script>
+    <script type="application/javascript" th:src="@{/js/banking.js}"></script>
+</head>
+<body>
+	<th:block th:replace="header :: headerFragment"></th:block>
+	<div class="container-xl my-5" style="height: auto; min-height: calc(100vh - 100px); padding-bottom: 100px;">
+		<div style="margin: 0 auto;">
+			<form action="/banking/sendBank" method="post" name="sendform">
+				<table class="table table-bordered" style="border:1px solid #ccc; text-align:center">
+						<td style="background-color:#E1E1E1" colspan="4">
+							<h2 style="text-align: center;">당행/다른기관이체</h2>
+						</td>
+					</tr>
+				</table>
+				<table class="table table-bordered">
+					<thead>
+						<tr>
+							<td style="background-color:#fafafa; text-align:center" colspan="4">
+								<h3 style="text-align: center;">출금정보</h3>
+							</td>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td style="background-color:#fafafa; width:10%;" rowspan="2">출금계좌번호</td>
+							<td style="width:60%;">
+								<select name="myacc" id="myacc" class="form-select">
+									<option value="0">계좌를 선택해주세요.</option>
+									<option th:each="acc:${accList}"
+											th:text="|${acc.myacc}(저축예금)|"
+											th:value="${acc.myacc}"></option>
+								</select>
+							</td>
+							<td>
+								<button type="button" class="btn btn-secondary form-control" onclick="myaccmoneyview()">잔액조회</button>
+							</td>
+							<td>
+								<button type="button" class="btn btn-secondary form-control" onclick="check()">본인계좌조회</button>
+							</td>
+						</tr>
+						<tr>
+							<td style="padding:15px 10px; text-align:right;">출금가능잔액</td>
+							<td colspan="2">
+								<input type="text" class="form-control" id="myaccmoney" readonly />
+							</td>
+						</tr>
+						<tr>
+							<td style="background-color:#fafafa">계좌비밀번호</td>
+							<td colspan="3">
+								<input type="text" class="form-control" style="width:66%;" name="myaccpw" id="mypw" placeholder="숫자 4자리" />
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				<table class="table table-bordered">
+					<thead>
+						<tr>
+							<td colspan="9" style="background-color:#fafafa">
+								<h3 style="text-align: center;">입금정보</h3>
+							</td>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td style="background-color:#fafafa; width:10%;">입금은행</td>
+							<td colspan="8">
+								<select class="form-select" name="mysendbank" id="sendbank">
+									<option value="0">입금하실 은행을 선택해주세요.</option>
+									<option th:each="bank:${bankList}" th:text="${bank}"></option>
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<td style="background-color:#fafafa">입금계좌번호</td>
+							<td colspan="8">
+								<input type="text" class="form-control" name="mysendacc" id="sendacc" placeholder="'-'없이 숫자만 입력" />
+							</td>
+						</tr>
+						<tr>
+							<td style="background-color:#fafafa" rowspan="2">이체금액</td>
+							<td colspan="8">
+								<input type="text" class="form-control" name="myaccbalance" id="sendmoney"
+										style="width:97%; display: inline-block; vertical-align:middle;"/>
+								<p style="display:inline-block; font-size: 150%; margin: 0 auto;">원</p>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<button type="button" class="btn btn-secondary form-control" onclick="sendMoney('100')">100만</button>
+							</td>
+							<td>
+								<button type="button" class="btn btn-secondary form-control" onclick="sendMoney('50')">50만</button>
+							</td>
+							<td>
+								<button type="button" class="btn btn-secondary form-control" onclick="sendMoney('10')">10만</button>
+							</td>
+							<td>
+								<button type="button" class="btn btn-secondary form-control" onclick="sendMoney('5')">5만</button>
+							</td>
+							<td>
+								<button type="button" class="btn btn-secondary form-control" onclick="sendMoney('3')">3만</button>
+							</td>
+							<td>
+								<button type="button" class="btn btn-secondary form-control" onclick="sendMoney('1')">1만</button>
+							</td>
+							<td>
+								<button type="button" class="btn btn-secondary form-control" onclick="sendMoney('all')">전액</button>
+							</td>
+							<td>
+								<button type="button" class="btn btn-secondary form-control"  onclick="sendMoney('cancel')">정정</button>
+							</td>
+						</tr>
+						<tr>
+							<td style="background-color:#fafafa">받는통장 메모</td>
+							<td colspan="8">
+								<input type="text" class="form-control" name="myaccioname" id="myaccioname" placeholder="(선택)15자 이내 입력" />
+							</td>
+						</tr>
+						<tr>
+							<td style="background-color:#fafafa">내통장 메모</td>
+							<td colspan="8">
+								<textarea rows="10" class="form-control" name="myaccmemo" id="myaccmemo" cols="50" placeholder="(선택)500자 이내 메모"></textarea>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="10" style="text-align:right;">
+								<input type="submit" class="btn btn-secondary form-label" style="width:100px; margin: 0 auto;" value="다음">
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</form>
+		</div>
+    </div>
+	<th:block th:replace="footer :: footerFragment"></th:block>
+</body>
+</html>

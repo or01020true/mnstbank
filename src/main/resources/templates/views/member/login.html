@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="kr" xmlns:th="http://thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width", initial-scale="1">
+<title>MNST 로그인</title>
+</head>
+<body>
+	<th:block th:replace="header :: headerFragment"></th:block>
+	<div style="height: auto; min-height: calc(100vh - 100px); padding-bottom: 100px;
+			display: flex; justify-content: center; align-items: center;">
+		<div class="col-4 pt-4" style="margin:0 auto;">
+			<h2 class="text-center">로그인</h2>
+			<form th:action="@{/member/login}" method="post">
+				<input type="hidden" name="_csrf" value="2393241f-12bf-4b3e-bc12-6b92bcc15e3c"/>
+				<div class="mb-3">
+					<label for="memberid" class="form-label">아이디</label>
+					<input type="text" class="form-control" name="myid" id="memberid" placeholder="아이디">
+				</div>
+				<div class="mb-3">
+					<label for="password" class="form-label">비밀번호</label>
+					<input type="password" class="form-control" name="mypw" id="password" placeholder="비밀번호">
+				</div>
+				<div class="mb-3">
+					<input type="submit" class="btn btn-dark form-control" value="로그인">
+				</div>
+				<div class="mb-3">
+					<a href="/member/joinInfo" class="btn btn-secondary form-control">회원가입</a>
+				</div>
+			</form>
+		</div>
+	</div>
+	<th:block th:replace="footer :: footerFragment"></th:block>
+</body>
+</html>
