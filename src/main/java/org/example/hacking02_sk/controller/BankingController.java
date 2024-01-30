@@ -18,6 +18,7 @@ import org.example.hacking02_sk.model.Banking;
 import org.example.hacking02_sk.model.DetailHistory;
 import org.example.hacking02_sk.model.SendBanking;
 import org.example.hacking02_sk.model.User;
+import org.example.hacking02_sk.model.UserDAO;
 import org.example.hacking02_sk.service.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -38,6 +39,9 @@ public class BankingController {
     BankingMapper bankingMapper;
     
     @Autowired
+    UserDAO userDAO;
+
+    @Autowired
     JwtUtil jwtUtil;
 
     @Autowired
@@ -53,11 +57,13 @@ public class BankingController {
     }
 
     @ModelAttribute("accList")
-    List<Banking> accList(HttpSession session){
+    List<Banking> accList(HttpSession session, HttpServletRequest request){
         User user = (User)session.getAttribute("user");
-//        System.out.println(user);
-        if (user != null){
+        String jwt = jwtUtil.getToken(request.getCookies());
+        if (jwt != null){
             bankList = bankingMapper.myid(user.getMyid());
+        } else {
+            bankList = new ArrayList<Banking>();
         }
         return bankList;
     }
@@ -73,11 +79,11 @@ public class BankingController {
     String bankingInOut(
             @PathVariable String page,
             HttpSession session,
+            HttpServletRequest request,
             Model model){
         User user = (User)session.getAttribute("user");
-//        System.out.println(user + "??");
-        if (user == null) {
-//            System.out.println("여기로 들어옴?");
+        String jwt = jwtUtil.getToken(request.getCookies());
+        if (jwt == null) {
             model.addAttribute("msg", "로그인 해주세요.");
             model.addAttribute("check", 2);
             return "banking/alert";
@@ -85,10 +91,8 @@ public class BankingController {
             long sessionCreateTime = session.getCreationTime();
             Date time = new Date(sessionCreateTime);
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            //String myid = session.getAttribute();
             if (page.equals("myaccount")) {
-                List<Banking> banking = bankingMapper.myid(user.getMyid());
-//            System.out.println(banking);
+                List<Banking> banking = bankingMapper.myid(jwtUtil.extractUserId(jwt));
                 model.addAttribute("accs", banking);
             }else if (page.equals("bankingResult")) {
                 model.addAttribute("result", sendBanking);
@@ -112,7 +116,7 @@ public class BankingController {
                 model.addAttribute("myacc", this.acc);
             }
             //System.out.println(page);
-            model.addAttribute("name", user.getMyname());
+            model.addAttribute("name", userDAO.getName(jwtUtil.extractUserId(jwt)));
             return "banking/" + page;
         }
     }
@@ -144,7 +148,27 @@ public class BankingController {
     ModelAndView sendBank(SendBanking sendBanking, HttpServletRequest request) {
         ModelAndView mav = new ModelAndView("banking/alert");
         String msg = "";
-        Banking banking = bankingMapper.myacc(sendBanking.getMyacc());
+
+        // JWT validation - start
+        String jwt = jwtUtil.getToken(request.getCookies());
+        if (jwt == null) {
+            System.out.println("(hy debug) JWT값 미존재");
+            msg = "JWT값이 없습니다.";
+            mav.addObject("msg", msg);
+            return mav;
+        }
+        String userId = jwtUtil.extractUserId(jwt);
+        if (userId == null) {
+            System.out.println("(hy debug) JWT 인증실패");
+            msg = "유효하지 않은 JWT입니다.";
+            mav.addObject("msg", msg);
+            return mav;
+        }
+        System.out.println("(hy debug) JWT 인증성공 : (userId = " + userId + ")");
+        // JWT validation - end
+
+        // Banking banking = bankingMapper.myacc(sendBanking.getMyacc());
+        Banking banking = bankingMapper.myid(userId).get(0);
         int submoney = banking.getMymoney() - sendBanking.getMyaccbalance();
         String memo = sendBanking.getMyaccmemo();
 
@@ -156,34 +180,12 @@ public class BankingController {
             msg = "비밀번호를 다시 입력해주세요.";
             mav.addObject("msg", msg);
             return mav;
-        }else if (sendBanking.getMyacc() == sendBanking.getMysendacc()) {
-            msg = "출금계좌와 입금계좌는 중복될 수 없습니다.";
-            mav.addObject("msg", msg);
-            return mav;
         }
-
-        // JWT validation - start
-        boolean jwt_validation = false;
-        String debug_jwt = "";
-        Cookie[] cookies = request.getCookies();
-        if (cookies != null) {
-            for (Cookie cookie : cookies) {
-                if (cookie.getName().equals("JWT")) {
-                    debug_jwt = cookie.getValue();  // hy debug
-                    jwt_validation = jwtUtil.validateToken(cookie.getValue());
-                }
-            }
-        }
-
-        if (!jwt_validation) {
-            System.out.println("(hy debug) JWT 인증실패 : " + debug_jwt);
-            msg = "유효하지 않은 JWT입니다.";
-            mav.addObject("msg", msg);
-            return mav;
-        } else {
-            System.out.println("(hy debug) JWT 인증성공 : " + debug_jwt);
-        }
-        // JWT validation - end
+        // else if (sendBanking.getMyacc() == sendBanking.getMysendacc()) {
+        //     msg = "출금계좌와 입금계좌는 중복될 수 없습니다.";
+        //     mav.addObject("msg", msg);
+        //     return mav;
+        // }
 
         if (sendBanking.getMysendbank().equals("MNST")) {
             Banking banking2 = bankingMapper.myacc(sendBanking.getMysendacc());
@@ -195,7 +197,6 @@ public class BankingController {
             }
 
             sendBanking.setMyaccout(submoney);
-//            System.out.println(sendBanking);
             bankingMapper.submoney(sendBanking);
             bankinghistMapper.insert(sendBanking);
 
@@ -207,7 +208,6 @@ public class BankingController {
             sendBanking.setMyaccmemo("");
             bankingMapper.addmoney(sendBanking);
             bankinghistMapper.insert(sendBanking);
-//            System.out.println(sendBanking);
         }
 
         sendBanking.setMyaccmemo(memo);
@@ -215,7 +215,6 @@ public class BankingController {
         mav.addObject("msg", "이체처리 완료되었습니다.");
         mav.addObject("check", 1);
         this.sendBanking = sendBanking;
-        //System.out.println(sendBanking);
         return mav;
     }
 

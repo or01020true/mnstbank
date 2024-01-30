@@ -123,8 +123,6 @@ public class UserController {
 	public String login() {
 		return "member/login";
 	}
-	
-	HashMap<String, String> sessions = new HashMap<String, String>();
 
     @PostMapping("login")
 	public ModelAndView loginAction(User user, HttpServletRequest request, HttpServletResponse response) {
@@ -139,14 +137,13 @@ public class UserController {
 			session.setAttribute("user", user);
 			session.setMaxInactiveInterval(session_time_seconds);
 
-			String jwtToken = jwtUtil.generateToken(user.getMyid());
+			String jwtToken = jwtUtil.setToken(user.getMyid(), session_time_seconds);
 			Cookie cookie = new Cookie("JWT", jwtToken);
 			cookie.setMaxAge(session_time_seconds);
 			cookie.setPath("/");
 			System.out.println("(hy debug) Add cookie : " + cookie.getValue());
 
 			response.addCookie(cookie);
-			sessions.put(session.getId(), ((User)(session.getAttribute("user"))).getMyname());
 			mav.setViewName("redirect:/");
 			return mav;
         }
@@ -180,39 +177,18 @@ public class UserController {
 			mav.addObject("message", "세션이 만료되었습니다.");
 		}
 		else { // 로그아웃 시도
-			if (session.getAttribute("user") != null)
-				sessions.remove(session.getId());
 			session.invalidate();
 			mav.addObject("message", "로그아웃 하였습니다.");
 
-			// 모든 쿠키 삭제
-			Cookie[] cookies = request.getCookies();
-			if (cookies != null) {
-				for (Cookie cookie : cookies) {
-					if(cookie.getName().equals("JWT"))
-					{
-						cookie.setMaxAge(0);
-						cookie.setPath("/");
-						System.out.println("(hy debug) Remove cookie : " + cookie.getValue());
-						response.addCookie(cookie);
-					}
-				}
+			// JWT 쿠키 삭제
+			if (jwtUtil.removeToken(request.getCookies(), response)) {
+				System.out.println("(hy debug) Remove cookie.");
+			} else {
+				System.out.println("(hy debug) Not remove cookie.");
 			}
 		}
 		mav.setViewName("/member/logout");
 		return mav;
-	}
-
-	// test
-	@RequestMapping("/sessions")
-	@ResponseBody
-	public String sessionList() {
-		StringBuilder sb = new StringBuilder("{");
-		for(String key : sessions.keySet()) {
-			sb.append(key + " : " + sessions.get(key) + "\n");
-		}
-		sb.append("}");
-		return sb.toString();
 	}
     
     // 주소 검색
