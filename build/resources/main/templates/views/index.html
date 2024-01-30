@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="kr" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="../css/bootstrap.css">
+	<script src="../js/MyLibrary.js" ></script> 
+    <title>MNST</title>
+    <style>
+        @media screen and (min-width: 340px) and (max-width: 767px) {
+            /*767px 아래일 때 요소 삭제*/
+            .none-item {
+                display: none;
+            }
+        }
+
+        .containers {
+            height: auto;
+            min-height: calc(100vh - 100px);
+            /*padding-bottom: 100px; !*footer 높이만큼*!*/
+
+            font-size: 16px; /*최상위 폰트 크기*/
+        }
+        .carousel_slide {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+            margin: 2% 0;
+        }
+        .carousel_wrap {
+            margin: 0;
+            padding: 0;
+            height: 380px;
+            width: 300%;
+            overflow: hidden;
+            position: relative;
+        }
+        .carousel_wrap li {
+            width: 33.333%;
+            display: inline-block;
+            position: relative;
+            float: left;
+        }
+        .carousel_wrap li a {
+            height: 380px;
+            display: flex;
+            justify-content: center;
+            position: relative;
+        }
+        .carousel_1 a {
+            background-color: #ffffff;
+        }
+        .carousel_2 a {
+            background-color: #ffffff;
+        }
+        .carousel_3 a {
+            background-color: #ffffff;
+        }
+        .carousel_btns a{
+            display: block;
+            position: absolute;
+            top: 40%;
+        }
+        .carousel_btns img {
+            width: 80px;
+            height: 80px;
+        }
+        .carousel_btns .prev {
+            left: 1%;
+        }
+        .carousel_btns .next {
+            right: 1%;
+        }
+
+        .menu_box {
+            display: flex;
+            width: 100%;
+            height: auto;
+            color: #ffffff;
+            background-color: #0076be;
+        }
+
+        .menu_inner_box {
+            padding: 3% 0;
+            margin: 0 auto;
+            width: 88%;
+
+            position: relative;
+        }
+
+        .menu_inner_box a{
+            text-decoration-line: none;
+            color: #ffffff;
+        }
+
+        .menu_inner_box ul{
+            list-style: none;
+            font-size: 0.8rem;
+            padding: 0;
+
+            display: block;
+            margin-block-start: 2em;
+            margin-block-end: 2em;
+            margin-inline-start: 0;
+            margin-inline-end: 0;
+            padding-inline-start: 0;
+        }
+
+        .menu_inner_box li{
+            float: left;
+            width: calc(100% / 4);
+            text-align: center;
+        }
+
+        .menu_inner_box span{
+            text-align: center;
+            display: block;
+            font-size: 0.8rem;
+        }
+
+        .menu_inner_box img{
+            max-width: 90px;
+            width: 4.6rem;
+            height: 4.6rem;
+        }
+
+        .service_box{
+			position: relative;
+            width: 100%;
+            height: auto;
+            color: #000000;
+            background-color: #ffffff;
+
+            margin-bottom: 2%;
+        }
+
+        .service_inner_box {
+			padding: 3% 0;
+            margin: 0 auto;
+            width: 88%;
+        }
+        
+        .service_menu_box {
+			width: 100%;
+			height: 5rem;
+			border: 3px solid #D5D5D5;
+			
+			position: relative;
+			margin: 0 auto;
+        }
+        
+        .service_menu_box ul{
+            list-style: none;
+            padding: 0;
+            
+            display: block;
+    		margin-block-start: 2em;
+    		margin-block-end: 2em;
+    		margin-inline-start: 0;
+    		margin-inline-end: 0;
+    		padding-inline-start: 0;
+
+            font-size: 0.8rem;
+        }
+        
+        .service_menu_box li{
+        	float: left;
+    		width: calc(100% / 5);
+    		text-align: center;
+        }
+
+        .service_menu_box span{
+            font-size: 0.8rem;
+        }
+        
+        .service_menu_box img{
+            max-height: 18px;
+            width: 1rem;
+            height: 1rem;
+            margin: 0 0 1% 1%;
+        }
+        
+        .service_menu_box a{
+			text-decoration: none;
+			display: block;
+            font-size: 0.8rem;
+		    color: #333;
+		}
+    </style>
+</head>
+<body>
+	<script>
+		param1 = {
+			method: "POST",
+			url: "/ImageReader",
+			setRequestHeader: '',
+			async: "false",
+			withCredentials: "true",
+		}
+	</script>
+
+    
+	<th:block th:replace="header :: headerFragment"></th:block>
+    <!-- main -->
+    <div class="containers">
+        <!-- 광고배너 -->
+        <div class="carousel_slide">
+            <div>
+                <ul class="carousel_wrap">
+                    <li class="carousel_1">
+                        <a href="#">
+                            <!-- <img src="http://192.168.101.135:8888/banner1.png" alt="img1"> -->
+                            <img th:src="@{/images/banner1.png}" alt="img1">
+                        </a>
+                    </li>
+                    <li class="carousel_2">
+                        <a href="#">
+                            <!-- <img src="http://192.168.101.135:8888/banner2.png" alt="img2"> -->
+                            <img th:src="@{/images/banner2.png}" alt="img2">
+                        </a>
+                    </li>
+                    <li class="carousel_3">
+                        <a href="#">
+                            <!-- <img src="http://192.168.101.135:8888/banner3.png" alt="img3"> -->
+                            <img th:src="@{/images/banner3.png}" alt="img3">
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="carousel_btns">
+                <a href="#" class="prev" onclick="return false"><img th:src="@{/images/btn_prev.png}"></a>
+                <a href="#" class="next" onclick="return false"><img th:src="@{/images/btn_next.png}"></a>
+            </div>
+        </div>
+        <!-- 금융상품 -->
+        <div class="menu_box">
+            <div class="menu_inner_box">
+                <p style="font-size: 1rem;">금융상품</p>
+                <ul>
+                    <li><a href="#"><img th:src="@{/images/inmoney.png}"/><span>예금</span></a></li>
+                    <li><a href="#"><img th:src="@{/images/chart.png}"/><span>펀드</span></a></li>
+                    <li><a href="#"><img th:src="@{/images/loan.png}"/><span>대출</span></a></li>
+                    <li><a href="#"><img th:src="@{/images/oldmoney.png}"/><span>퇴직연금</span></a></li>
+                </ul>
+            </div>
+        </div>
+        <!-- 주요 서비스 -->
+        <div class="service_box">
+            <div class="service_inner_box">
+				<p style="font-size: 1rem;">주요서비스</p>
+				<div class="service_menu_box">
+					<ul>
+	                    <li><a class="a_class_next버튼" href="/banking/inout"><span>이체</span><!-- <img th:src="@{/images/next.png}"/> --></a></li>
+	                    <li><a class="a_class_next버튼" href="/banking/acchistory"><span>계좌조회</span><!-- <img th:src="@{/images/next.png}"/> --></a></li>
+	                    <li><a class="a_class_next버튼" href="/jsp/___NoticeBoard_List"><span>게시판</span><!-- <img th:src="@{/images/next.png}"/> --></a></li>
+	                    <li><a class="a_class_next버튼" href="/"><span>환전</span><!-- <img th:src="@{/images/next.png}"/> --></a></li>
+	                    <li><a class="a_class_next버튼" href="/"><span>환율조회</span><!-- <img th:src="@{/images/next.png}"/> --></a></li>
+                	</ul>
+				</div>
+			<script>    
+				//console.log(xmlHttpRequest.response)   
+				window.img_s=[]
+				
+      			document.querySelectorAll('a[class=a_class_next버튼]').forEach((a,i,arr)=>{
+      				img = document.createElement('img');
+      				a.appendChild(img)
+      				window.img_s.push(img)
+          		}) 	 
+
+	  			param1.send_querystring = 'name=next.png'   
+    			param1.done_2xx_callback = ()=>{
+    				for(var i=0;i<window.img_s.length;i++){
+    					window.img_s[i].src = window.xmlHttpRequest.response;  	 
+    				}
+				}
+    			window.xmlHttpRequest = MyLibrary.Base.xmlHttpRequest( param1 )  
+            </script>
+            
+            </div>
+        </div>
+    </div>
+    <!-- script -->
+    <script>
+        $(document).ready(function() {
+
+            var carouselIndex = 0;
+            var carouselLength = $(".carousel_wrap li").length;
+
+            setInterval(function() {
+                if(carouselIndex < carouselLength-1) {
+                    $(".carousel_wrap").animate({left:"-=100%"}, 2000);
+                    carouselIndex += 1;
+                } else {
+                    $(".carousel_wrap").animate({left:"0"}, 2000);
+                    carouselIndex = 0;
+                }
+            }, 4000);
+
+            $(".prev").click(function() {
+                if(carouselIndex > 0) {
+                    $(".carousel_wrap").animate({left:"+=100%"}, 2000);
+                    carouselIndex -= 1;
+                } else {
+                    $(".carousel_wrap").animate({left:"-200%"}, 2000);
+                    carouselIndex = carouselLength-1;
+                }
+            });
+
+            $(".next").click(function() {
+                if(carouselIndex < carouselLength-1) {
+                    $(".carousel_wrap").animate({left:"-=100%"}, 2000);
+                    carouselIndex += 1;
+                } else {
+                    $(".carousel_wrap").animate({left:"0"}, 2000);
+                    carouselIndex = 0;
+                }
+            });
+        });
+    </script>
+    <!--footer-->
+	<th:block th:replace="footer :: footerFragment"></th:block>
+</body>
+</html>
