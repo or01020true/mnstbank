@@ -8,6 +8,9 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.example.hacking02_sk.mapper.BankingMapper;
 import org.example.hacking02_sk.mapper.BankinghistMapper;
@@ -15,6 +18,7 @@ import org.example.hacking02_sk.model.Banking;
 import org.example.hacking02_sk.model.DetailHistory;
 import org.example.hacking02_sk.model.SendBanking;
 import org.example.hacking02_sk.model.User;
+import org.example.hacking02_sk.service.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -32,6 +36,9 @@ import org.springframework.web.servlet.ModelAndView;
 public class BankingController {
     @Autowired
     BankingMapper bankingMapper;
+    
+    @Autowired
+    JwtUtil jwtUtil;
 
     @Autowired
     BankinghistMapper bankinghistMapper;
@@ -134,7 +141,7 @@ public class BankingController {
     }
 
     @PostMapping("sendBank")
-    ModelAndView sendBank(SendBanking sendBanking) {
+    ModelAndView sendBank(SendBanking sendBanking, HttpServletRequest request) {
         ModelAndView mav = new ModelAndView("banking/alert");
         String msg = "";
         Banking banking = bankingMapper.myacc(sendBanking.getMyacc());
@@ -154,6 +161,29 @@ public class BankingController {
             mav.addObject("msg", msg);
             return mav;
         }
+
+        // JWT validation - start
+        boolean jwt_validation = false;
+        String debug_jwt = "";
+        Cookie[] cookies = request.getCookies();
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                if (cookie.getName().equals("JWT")) {
+                    debug_jwt = cookie.getValue();  // hy debug
+                    jwt_validation = jwtUtil.validateToken(cookie.getValue());
+                }
+            }
+        }
+
+        if (!jwt_validation) {
+            System.out.println("(hy debug) JWT 인증실패 : " + debug_jwt);
+            msg = "유효하지 않은 JWT입니다.";
+            mav.addObject("msg", msg);
+            return mav;
+        } else {
+            System.out.println("(hy debug) JWT 인증성공 : " + debug_jwt);
+        }
+        // JWT validation - end
 
         if (sendBanking.getMysendbank().equals("MNST")) {
             Banking banking2 = bankingMapper.myacc(sendBanking.getMysendacc());
@@ -179,6 +209,7 @@ public class BankingController {
             bankinghistMapper.insert(sendBanking);
 //            System.out.println(sendBanking);
         }
+
         sendBanking.setMyaccmemo(memo);
         sendBanking.setMyaccout(submoney);
         mav.addObject("msg", "이체처리 완료되었습니다.");

@@ -4,7 +4,11 @@ spring :
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url : jdbc:mysql://localhost:3306/myhacking
+<<<<<<< HEAD
 #    url : jdbc:mysql://mydatabase.coysatc2jipz.ap-northeast-2.rds.amazonaws.com:3306/myhacking
+=======
+    # url : jdbc:mysql://mydatabase.coysatc2jipz.ap-northeast-2.rds.amazonaws.com:3306/myhacking
+>>>>>>> a753a466ca662b55f6d9f4d8206b0a63f42fa81a
     username: myhack
     password: 1234
 mybatis :
