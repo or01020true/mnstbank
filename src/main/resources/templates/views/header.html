@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="kr" xmlns:th="http://thymeleaf.org">
-	<th:block th:fragment="headerFragment">
+	<th:block th:fragment="headerFragment"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <script th:src="@{/js/jquery-3.7.1.min.js}"></script>
 	<script th:src="@{/js/bootstrap.js}"></script>
     <link rel="stylesheet" th:href="@{/css/bootstrap.css}">
@@ -17,7 +18,7 @@
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">
 				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 					<li class="nav-item">
-						<a class="nav-link active" aria-current="page" href="/jsp/___NoticeBoard_List">문의게시판</a>
+						<a class="nav-link active" aria-current="page" href="/jsp/___NoticeBoard_List">게시판</a>
 					</li>
 					<li class="nav-item">
 						<a class="nav-link active" aria-current="page" href="/banking/inout">이체</a>

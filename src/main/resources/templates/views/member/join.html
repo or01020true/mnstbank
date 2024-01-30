@@ -2,9 +2,16 @@
 <html lang="kr" xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width", initial-scale="1">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>MNST 회원가입</title>
 <style>
+	@media screen and (min-width: 340px) and (max-width: 767px) {
+		/*767px 아래일 때 요소 삭제*/
+		.none-item {
+			display: none;
+		}
+	}
+
 	input[type="number"]::-webkit-outer-spin-button,
 	input[type="number"]::-webkit-inner-spin-button {
     	-webkit-appearance: none;
