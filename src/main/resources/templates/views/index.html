@@ -215,26 +215,27 @@
                     <li class="carousel_1">
                         <a href="#">
                             <!-- <img src="http://192.168.101.135:8888/banner1.png" alt="img1"> -->
-                            <img th:src="@{/images/banner1.png}" alt="img1">
+<!--                            <img th:src="@{/images/banner1.png}" alt="img1">-->
+                            <img src="https://mnst-images.s3.ap-northeast-2.amazonaws.com/banner1.png" alt="img1">
                         </a>
                     </li>
                     <li class="carousel_2">
                         <a href="#">
                             <!-- <img src="http://192.168.101.135:8888/banner2.png" alt="img2"> -->
-                            <img th:src="@{/images/banner2.png}" alt="img2">
+                            <img src="https://mnst-images.s3.ap-northeast-2.amazonaws.com/banner2.png" alt="img2">
                         </a>
                     </li>
                     <li class="carousel_3">
                         <a href="#">
                             <!-- <img src="http://192.168.101.135:8888/banner3.png" alt="img3"> -->
-                            <img th:src="@{/images/banner3.png}" alt="img3">
+                            <img src="https://mnst-images.s3.ap-northeast-2.amazonaws.com/banner3.png" alt="img3">
                         </a>
                     </li>
                 </ul>
             </div>
             <div class="carousel_btns">
-                <a href="#" class="prev" onclick="return false"><img th:src="@{/images/btn_prev.png}"></a>
-                <a href="#" class="next" onclick="return false"><img th:src="@{/images/btn_next.png}"></a>
+                <a href="#" class="prev" onclick="return false"><img src="https://mnst-images.s3.ap-northeast-2.amazonaws.com/btn_prev.png"></a>
+                <a href="#" class="next" onclick="return false"><img src="https://mnst-images.s3.ap-northeast-2.amazonaws.com/btn_next.png"></a>
             </div>
         </div>
         <!-- 금융상품 -->
@@ -242,10 +243,10 @@
             <div class="menu_inner_box">
                 <p style="font-size: 1rem;">금융상품</p>
                 <ul>
-                    <li><a href="#"><img th:src="@{/images/inmoney.png}"/><span>예금</span></a></li>
-                    <li><a href="#"><img th:src="@{/images/chart.png}"/><span>펀드</span></a></li>
-                    <li><a href="#"><img th:src="@{/images/loan.png}"/><span>대출</span></a></li>
-                    <li><a href="#"><img th:src="@{/images/oldmoney.png}"/><span>퇴직연금</span></a></li>
+                    <li><a href="#"><img src="https://mnst-images.s3.ap-northeast-2.amazonaws.com/inmoney.png"/><span>예금</span></a></li>
+                    <li><a href="#"><img src="https://mnst-images.s3.ap-northeast-2.amazonaws.com/chart.png"/><span>펀드</span></a></li>
+                    <li><a href="#"><img src="https://mnst-images.s3.ap-northeast-2.amazonaws.com/loan.png"/><span>대출</span></a></li>
+                    <li><a href="#"><img src="https://mnst-images.s3.ap-northeast-2.amazonaws.com/oldmoney.png"/><span>퇴직연금</span></a></li>
                 </ul>
             </div>
         </div>
@@ -262,8 +263,7 @@
 	                    <li><a class="a_class_next버튼" href="/"><span>환율조회</span><!-- <img th:src="@{/images/next.png}"/> --></a></li>
                 	</ul>
 				</div>
-			<script>    
-				//console.log(xmlHttpRequest.response)   
+			<script>
 				window.img_s=[]
 				
       			document.querySelectorAll('a[class=a_class_next버튼]').forEach((a,i,arr)=>{
