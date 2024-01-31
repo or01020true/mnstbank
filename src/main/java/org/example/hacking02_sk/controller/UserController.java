@@ -51,9 +51,9 @@ public class UserController {
 	
 	// 회원가입
 	@RequestMapping("join")
-	public String join(Model model) {
+	public String join(Model model, @RequestParam(required = false) String url) {
 		model.addAttribute("user", new User()); //빈 객체보내기
-		return "member/join";
+		return "member/" + url;
 	}
 	
 	@PostMapping("join")
