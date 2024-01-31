@@ -44,16 +44,20 @@ public class UserController {
 	private JwtUtil jwtUtil;
 	
 	// 회원가입 약관
-	@GetMapping("joinInfo")
-	public String joinInfo() {
-		return "member/joinInfo";
+	@RequestMapping("joinInfo")
+	public String joinInfo(@RequestParam(required = false) String url) {
+//		System.out.println(url);
+		if (url == null) {
+			url = "joinInfo";
+		}
+		return "member/" + url;
 	}
 	
 	// 회원가입
 	@RequestMapping("join")
-	public String join(Model model, @RequestParam(required = false) String url) {
+	public String join(Model model) {
 		model.addAttribute("user", new User()); //빈 객체보내기
-		return "member/" + url;
+		return "member/join";
 	}
 	
 	@PostMapping("join")

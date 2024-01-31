@@ -29,7 +29,7 @@ repositories {
 
 dependencies {
 //    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
-    implementation group: 'org.thymeleaf', name: 'thymeleaf-spring5', version: '3.0.11.RELEASE'
+//    implementation group: 'org.thymeleaf', name: 'thymeleaf-spring5', version: '3.0.11.RELEASE'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     compileOnly 'org.projectlombok:lombok'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
@@ -38,7 +38,7 @@ dependencies {
     providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.0'
-    implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect'
+    implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect:2.4.1'
     implementation 'org.apache.logging.log4j:log4j-api:2.12.4'
     implementation 'org.apache.logging.log4j:log4j-core:2.12.4'
     implementation 'io.jsonwebtoken:jjwt-api:0.11.2'
