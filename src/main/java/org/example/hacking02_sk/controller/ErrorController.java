@@ -7,15 +7,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @Controller
-@RequestMapping("error-page")
+@RequestMapping("error")
 public class ErrorController {
     @RequestMapping("404")
     public String errorPage404(HttpServletRequest request, HttpServletResponse response){
-        return "error-page/404";
+        return "error-page/error";
     }
 
     @RequestMapping("500")
     public String errorPage500(HttpServletRequest request, HttpServletResponse response){
-        return "error-page/500";
+        return "error-page/error";
     }
 }
