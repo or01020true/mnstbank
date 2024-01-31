@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="kr" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Join Fail</title>
+    <script th:inline="javascript">
+        var error_message = [[${message}]];
+        alert(error_message);
+        window.location.href = "/";
+    </script>
+</head>
+<body>
+</body>
+</html>
