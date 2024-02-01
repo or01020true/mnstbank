@@ -7,7 +7,7 @@ import org.apache.ibatis.type.Alias;
 @Alias("sendbank")
 @Data
 public class SendBanking {
-    int myacc, myaccin, myaccout, myaccbalance, mysendacc, myaccpw;
-    String myaccioname, myaccmemo, mysendbank;
+    int myacc, myaccin, myaccout, myaccbalance, mysendacc;
+    String myaccioname, myaccmemo, mysendbank, csrfToken, myaccpw;
     Date myaccdate;
 }

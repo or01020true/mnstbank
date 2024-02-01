@@ -16,6 +16,7 @@ import org.example.hacking02_sk.mapper.BankingMapper;
 import org.example.hacking02_sk.mapper.BankinghistMapper;
 import org.example.hacking02_sk.model.Banking;
 import org.example.hacking02_sk.model.DetailHistory;
+import org.example.hacking02_sk.model.MyCsrfToken;
 import org.example.hacking02_sk.model.SendBanking;
 import org.example.hacking02_sk.model.User;
 import org.example.hacking02_sk.service.JwtUtil;
@@ -46,6 +47,7 @@ public class BankingController {
     List<Banking> bankList;
     SendBanking sendBanking;
     String acc;
+    String csrfToken;
 
     @ModelAttribute("checkData")
     Map<String, String> check() {
@@ -109,7 +111,13 @@ public class BankingController {
                 model.addAttribute("sendBankings", sendBankings);
                 model.addAttribute("time", sdf.format(time));
             }else if (page.equals("detailhistory")) {
+                csrfToken = new MyCsrfToken().getCsrfToken();
+                model.addAttribute("csrfToken", csrfToken);
+                System.out.println(csrfToken);
                 model.addAttribute("myacc", this.acc);
+            }else if (page.equals("inout")) {
+                csrfToken = new MyCsrfToken().getCsrfToken();
+                model.addAttribute("csrfToken", csrfToken);
             }
             //System.out.println(page);
             model.addAttribute("name", user.getMyname());
@@ -144,6 +152,29 @@ public class BankingController {
     ModelAndView sendBank(SendBanking sendBanking, HttpServletRequest request) {
         ModelAndView mav = new ModelAndView("banking/alert");
         String msg = "";
+
+        if (!sendBanking.getCsrfToken().equals(csrfToken)) {
+            msg = "조작하지 마세요.";
+            mav.addObject("msg", msg);
+            return mav;
+        }
+
+        char[] ch1 = sendBanking.getMyaccmemo().toCharArray();
+        char[] ch2 = sendBanking.getMyaccioname().toCharArray();
+
+        for (int i=0; i<sendBanking.getMyaccmemo().length(); i++) {
+            if (ch1[i] == '<' || ch1[i] == '>' || ch1[i] == '/') {
+                ch1[i] = ' ';
+            }
+        }
+        sendBanking.setMyaccmemo(String.valueOf(ch1));
+        for (int i=0; i<sendBanking.getMyaccioname().length(); i++) {
+            if (ch2[i] == '<' || ch2[i] == '>' || ch2[i] == '/') {
+                ch2[i] = ' ';
+            }
+        }
+        sendBanking.setMyaccioname(String.valueOf(ch2));
+
         Banking banking = bankingMapper.myacc(sendBanking.getMyacc());
         int submoney = banking.getMymoney() - sendBanking.getMyaccbalance();
         String memo = sendBanking.getMyaccmemo();
@@ -152,7 +183,7 @@ public class BankingController {
             msg = "잔고가 부족합니다.";
             mav.addObject("msg", msg);
             return mav;
-        }else if (sendBanking.getMyaccpw() != banking.getMyaccpw()) {
+        }else if (!sendBanking.getMyaccpw().equals(banking.getMyaccpw())) {
             msg = "비밀번호를 다시 입력해주세요.";
             mav.addObject("msg", msg);
             return mav;
@@ -227,7 +258,52 @@ public class BankingController {
     }
 
     @PostMapping("detailhistory")
-    String detailhistory(DetailHistory detailHistory, HttpSession session) {
+    String detailhistory(DetailHistory detailHistory, HttpSession session, Model model) {
+        if (!detailHistory.getCsrfToken().equals(csrfToken)) {
+            model.addAttribute("msg", "조작하지 마세요.");
+            return "banking/alert";
+        }else if(detailHistory.getKeyword().equals("") || detailHistory.getKeyword() == null) {
+            model.addAttribute("msg", "조작하지 마세요.");
+            return "banking/alert";
+        }
+
+        char[] ch1 = detailHistory.getBreakdown().toCharArray();
+        char[] ch2 = detailHistory.getDeal().toCharArray();
+        char[] ch3 = detailHistory.getKeyword().toCharArray();
+        char[] ch4 = detailHistory.getPredate().toCharArray();
+        char[] ch5 = detailHistory.getPostdate().toCharArray();
+
+        for (int i=0; i<detailHistory.getBreakdown().length(); i++) {
+            if (ch1[i] == '<' || ch1[i] == '>' || ch1[i] == '/') {
+                ch1[i] = ' ';
+            }
+        }
+        detailHistory.setBreakdown(String.valueOf(ch1));
+        for (int i=0; i<detailHistory.getDeal().length(); i++) {
+            if (ch2[i] == '<' || ch2[i] == '>' || ch2[i] == '/') {
+                ch2[i] = ' ';
+            }
+        }
+        detailHistory.setDeal(String.valueOf(ch2));
+        for (int i=0; i<detailHistory.getKeyword().length(); i++) {
+            if (ch3[i] == '<' || ch3[i] == '>' || ch3[i] == '/') {
+                ch3[i] = ' ';
+            }
+        }
+        detailHistory.setKeyword(String.valueOf(ch3));
+        for (int i=0; i<detailHistory.getPredate().length(); i++) {
+            if (ch4[i] == '<' || ch4[i] == '>' || ch4[i] == '/') {
+                ch4[i] = ' ';
+            }
+        }
+        detailHistory.setPredate(String.valueOf(ch4));
+        for (int i=0; i<detailHistory.getPostdate().length(); i++) {
+            if (ch5[i] == '<' || ch5[i] == '>' || ch5[i] == '/') {
+                ch5[i] = ' ';
+            }
+        }
+        detailHistory.setPostdate(String.valueOf(ch5));
+
         List<SendBanking> sendBankings;
         if (detailHistory.getKeyword() != null) {
             sendBankings = bankinghistMapper.searchmemo(detailHistory.getKeyword());
