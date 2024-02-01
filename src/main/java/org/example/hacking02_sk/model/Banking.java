@@ -8,8 +8,8 @@ import org.apache.ibatis.type.Alias;
 @Alias("bank")
 @Data
 public class Banking {
-    int myacc, mymoney, myaccpw;
-    String myid, mybank;
+    int myacc, mymoney;
+    String myid, mybank, csrfToken, myaccpw;
     Date myaccregdate;
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 

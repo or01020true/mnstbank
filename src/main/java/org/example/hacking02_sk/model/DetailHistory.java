@@ -5,6 +5,6 @@ import lombok.Data;
 
 @Data
 public class DetailHistory {
-    String keyword, predate, postdate, breakdown, deal;
+    String keyword, predate, postdate, breakdown, deal, csrfToken;
     int acc;
 }

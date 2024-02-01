@@ -38,7 +38,6 @@
     
     <!--main-->
     <div class="container">
-		
 		<div class="sub-container">
 		    <table class="table table-bordered">
 		        <tr>
@@ -48,6 +47,7 @@
 		        </tr>
 		        <tr>
 		            <form action="/banking/detailhistory" method="post">
+						<input type="hidden" name="csrfToken" th:value="${csrfToken}">
 		                <td colspan="4">
 		                    <input type="text" class="form-control" name="keyword" style="margin: 0 auto;"
 		                    	placeholder="받는통장메모 혹은 내통장메모를 입력해주세요." />
@@ -58,6 +58,7 @@
 		            </form>
 		        </tr>
 		        <form method="post">
+					<input type="hidden" name="csrfToken" th:value="${csrfToken}">
 		            <tr>
 		                <td style="background-color:#fafafa">조회계좌번호</td>
 		                <td colspan="4">
@@ -164,29 +165,27 @@
 	                <tr th:each="hist:${session.historys}">
 	                    <td th:text="${#dates.format(hist.myaccdate)}"></td>
 	                    <td>
-	                        <th:block th:if="${hist.myaccout == 0}">
-	                            0
+	                        <th:block th:if="${hist.myaccout == 0}" th:text="#{0}">
 	                        </th:block>
-	                        <th:block th:unless="${hist.myaccout == 0}">
-	                            [[${#numbers.formatInteger(hist.myaccbalance, 3, 'COMMA')}]]
+	                        <th:block th:unless="${hist.myaccout == 0}"
+									  th:text="${#numbers.formatInteger(hist.myaccbalance, 3, 'COMMA')}">
 	                        </th:block>
 	                    </td>
 	                    <td>
-	                        <th:block th:if="${hist.myaccin == 0}">
-	                            0
+	                        <th:block th:if="${hist.myaccin == 0}" th:text="#{0}">
 	                        </th:block>
-	                        <th:block th:unless="${hist.myaccin == 0}">
-	                            [[${#numbers.formatInteger(hist.myaccbalance, 3, 'COMMA')}]]
+	                        <th:block th:unless="${hist.myaccin == 0}"
+									  th:text="${#numbers.formatInteger(hist.myaccbalance, 3, 'COMMA')}">
 	                        </th:block>
 	                    </td>
-	                    <td th:utext="${hist.myaccioname}"></td>
-	                    <td th:utext="${hist.myaccmemo}"></td>
+	                    <td th:text="${hist.myaccioname}"></td>
+	                    <td th:text="${hist.myaccmemo}"></td>
 	                    <td>
-	                        <th:block th:if="${hist.myaccin != 0}">
-	                            [[${#numbers.formatInteger(hist.myaccin, 3, 'COMMA')}]]
+	                        <th:block th:if="${hist.myaccin != 0}"
+									  th:text="${#numbers.formatInteger(hist.myaccin, 3, 'COMMA')}">
 	                        </th:block>
-	                        <th:block th:if="${hist.myaccout != 0}">
-	                            [[${#numbers.formatInteger(hist.myaccout, 3, 'COMMA')}]]
+	                        <th:block th:if="${hist.myaccout != 0}"
+									  th:text="${#numbers.formatInteger(hist.myaccout, 3, 'COMMA')}">
 	                        </th:block>
 	                    </td>
 	                </tr>
