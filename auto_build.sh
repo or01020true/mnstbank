@@ -6,7 +6,7 @@ if [ -z "$webwas_container_name" ]; then # not use docker
     local_tomcat_path=/usr/local/tomcat/apache-tomcat-8.0.53
     sudo ${local_tomcat_path}/bin/shutdown.sh
     gradle build
-    sudo cp -f ${current_path}/build/libs/hacking02_sk-0.0.1-SNAPSHOT-plain.war ${local_tomcat_path}/webapps/ROOT.war
+    sudo cp -f ${current_path}/build/libs/vas1-0.0.1-SNAPSHOT-plain.war ${local_tomcat_path}/webapps/ROOT.war
     sudo rm -rf ${local_tomcat_path}/webapps/ROOT
     sudo ${local_tomcat_path}/bin/startup.sh
 else # use docker
@@ -14,5 +14,5 @@ else # use docker
     current_path=$(pwd)
     docker_tomcat_path=/usr/local/tomcat
     gradle build
-    docker cp ${current_path}/build/libs/hacking02_sk-0.0.1-SNAPSHOT-plain.war ${webwas_container_name}:${docker_tomcat_path}/webapps/ROOT.war
+    docker cp ${current_path}/build/libs/vas1-0.0.1-SNAPSHOT-plain.war ${webwas_container_name}:${docker_tomcat_path}/webapps/ROOT.war
 fi
