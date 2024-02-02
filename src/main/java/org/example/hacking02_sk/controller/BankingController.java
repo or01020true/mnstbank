@@ -159,8 +159,8 @@ public class BankingController {
             msg = "조작하지 마세요.";
             mav.addObject("msg", msg);
             return mav;
-        }else if (sendBanking.getMyaccbalance() < 0) {
-            System.out.println(sendBanking.getMyaccbalance());
+        }else if (sendBanking.getMyaccbalance() < 0 || String.valueOf(sendBanking.getMyaccbalance()).contains("-")) {
+//            System.out.println(sendBanking.getMyaccbalance());
             msg = "조작하지 마세요.";
             mav.addObject("msg", msg);
             return mav;
