@@ -191,12 +191,8 @@ public class BankingController {
             msg = "출금계좌와 입금계좌는 중복될 수 없습니다.";
             mav.addObject("msg", msg);
             return mav;
-        }else if (sendBanking.getMyaccbalance() == 0) {
-            msg = "0원은 이체할 수 없습니다.";
-            mav.addObject("msg", msg);
-            return mav;
-        }else if (sendBanking.getMyaccbalance() > 0) {
-            msg = "금액은 0원 이상이어야 합니다.";
+        }else if (sendBanking.getMyaccbalance() == 0 || sendBanking.getMyaccbalance() < 0) {
+            msg = "금액을 제대로 입력해주세요.";
             mav.addObject("msg", msg);
             return mav;
         }
