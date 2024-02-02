@@ -5,9 +5,9 @@
 <mapper namespace="org.example.hacking02_sk.mapper.BankinghistMapper">
     <sql id="search">
         <where>
-            myacc = ${acc}
+            myacc = #{acc}
             <if test="predate != null or postdate != null">
-                and Date(myaccdate) &gt;= '${predate}' and Date(myaccdate) &lt;= '${postdate}'
+                and Date(myaccdate) &gt;= #{predate} and Date(myaccdate) &lt;= #{postdate}
             </if>
             <if test="breakdown == 'out'">
                 and myaccin = 0
@@ -26,15 +26,15 @@
             order by myaccdate asc
         </if>
     </select>
-    <select id="sendbanking" resultType="sendbank" parameterType="java.lang.String">
-        select * from myacchistory where myacc = ${myacc} order by myaccdate desc limit 1;
+    <select id="sendbanking" resultType="sendbank" parameterType="java.lang.Integer">
+        select * from myacchistory where myacc = #{myacc} order by myaccdate desc limit 1;
     </select>
     <select id="searchmemo" resultType="sendbank" parameterType="java.lang.String">
-        select * from myacchistory where myaccioname like '%${keyword}%' or myaccmemo like '%${keyword}%'
+        select * from myacchistory where myaccioname like concat('%', #{keyword}, '%') or myaccmemo like concat('%', #{keyword}, '%')
     </select>
     <insert id="insert" parameterType="sendbank">
         insert into myacchistory(myacc, mysendbank, mysendacc, myaccin, myaccout, myaccbalance, myaccioname, myaccmemo)
-        values (${myacc}, '${mysendbank}', ${mysendacc}, ${myaccin}, ${myaccout}, ${myaccbalance},
-                '${myaccioname}', '${myaccmemo}')
+        values (#{myacc}, #{mysendbank}, #{mysendacc}, #{myaccin}, #{myaccout}, #{myaccbalance},
+                #{myaccioname}, #{myaccmemo})
     </insert>
 </mapper>

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="../css/bootstrap.css">
+	<link rel="stylesheet" th:href="@{/css/bootstrap.css}">
     <title>MNST - 계좌조회</title>
 	<script th:src="@{/js/jquery-3.7.1.min.js}"></script>
     <style>
@@ -41,9 +41,9 @@
 	            </td>
 	        </tr>
 	        <tr>
-	            <td colspan="4">조회건수 | [[${#arrays.length(accList)}]]건</td>
+	            <td colspan="4" th:text="'조회건수 | ' + ${#arrays.length(accList)} + '건'"></td>
 	            <td >기준일시 : </td>
-	            <td th:text="${time}"></td>
+	            <!--<td th:text="${time}"></td>-->
 	        </tr>
 	        <tr>
 	            <td style="background-color:#fafafa">은행</td>
