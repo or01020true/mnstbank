@@ -25,9 +25,6 @@ public class MvcConfig implements WebMvcConfigurer {
     @Autowired
     ApplicationContext applicationContext;
 
-    @Autowired
-    XSSInterceptor xssInterceptor;
-
     // JSP ViewResolver
     @Bean // Bean은 일종의 클래스들 Spring은 모든 클래스를 Bean으로 만들어서 ApplicationContext가 관리
     public ViewResolver jspViewResolver() {
@@ -90,11 +87,5 @@ public class MvcConfig implements WebMvcConfigurer {
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/**")
                 .addResourceLocations("classpath:/static/");
-    }
-
-    @Override
-    public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(xssInterceptor)
-                .addPathPatterns("/banking/**");
     }
 }

@@ -263,12 +263,19 @@ public class BankingController {
 
     @PostMapping("detailhistory")
     String detailhistory(DetailHistory detailHistory, HttpSession session, Model model) {
-        if (detailHistory.getKeyword() != null) {
-            model.addAttribute("msg", "조작하지 마세요.");
-            return "banking/alert";
-        }else if (!detailHistory.getCsrfToken().equals(csrfToken)) {
-            model.addAttribute("msg", "조작하지 마세요.");
-            return "banking/alert";
+        if (detailHistory.getCheckSearch() == 1) {
+            if (detailHistory.getKeyword() == null || detailHistory.getKeyword().strip().equals("")) {
+                model.addAttribute("msg", "조작하지 마세요.");
+                return "banking/alert";
+            }else if (!detailHistory.getCsrfToken().equals(csrfToken)) {
+                model.addAttribute("msg", "조작하지 마세요.");
+                return "banking/alert";
+            }
+        }else {
+            if (!detailHistory.getCsrfToken().equals(csrfToken)) {
+                model.addAttribute("msg", "조작하지 마세요.");
+                return "banking/alert";
+            }
         }
 
         if (detailHistory.getKeyword() != null) {
