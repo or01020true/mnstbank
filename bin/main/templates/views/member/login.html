@@ -56,10 +56,13 @@
 				<div class="mb-3">
 					<input type="submit" class="btn btn-dark form-control" value="로그인">
 				</div>
-				<div class="mb-3">
-					<a href="/member/joinInfo" class="btn btn-secondary form-control">회원가입</a>
-				</div>
 			</form>
+			<div class="mb-3">
+				<form action="/member/joinInfo" method="post">
+					<input type="hidden" name="url" value="joinInfo" />
+					<input type="submit" class="btn btn-secondary form-control" value="회원가입" />
+				</form>
+			</div>
 		</div>
 	</div>
 	<th:block th:replace="footer :: footerFragment"></th:block>
