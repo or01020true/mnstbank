@@ -153,7 +153,14 @@ public class BankingController {
         ModelAndView mav = new ModelAndView("banking/alert");
         String msg = "";
 
+        System.out.println(sendBanking.getMyaccbalance());
+
         if (!sendBanking.getCsrfToken().equals(csrfToken)) {
+            msg = "조작하지 마세요.";
+            mav.addObject("msg", msg);
+            return mav;
+        }else if (sendBanking.getMyaccbalance() < 0) {
+            System.out.println(sendBanking.getMyaccbalance());
             msg = "조작하지 마세요.";
             mav.addObject("msg", msg);
             return mav;
@@ -191,7 +198,7 @@ public class BankingController {
             msg = "출금계좌와 입금계좌는 중복될 수 없습니다.";
             mav.addObject("msg", msg);
             return mav;
-        }else if (sendBanking.getMyaccbalance() == 0 || sendBanking.getMyaccbalance() < 0) {
+        }else if (sendBanking.getMyaccbalance() == 0) {
             msg = "금액을 제대로 입력해주세요.";
             mav.addObject("msg", msg);
             return mav;
