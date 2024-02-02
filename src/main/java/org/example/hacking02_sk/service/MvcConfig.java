@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewResolverRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -23,6 +24,9 @@ public class MvcConfig implements WebMvcConfigurer {
     // 모든 Bean을 관리하는 ApplicationContext 객체 불러오기(새롭게 생성 X)
     @Autowired
     ApplicationContext applicationContext;
+
+    @Autowired
+    XSSInterceptor xssInterceptor;
 
     // JSP ViewResolver
     @Bean // Bean은 일종의 클래스들 Spring은 모든 클래스를 Bean으로 만들어서 ApplicationContext가 관리
@@ -86,5 +90,11 @@ public class MvcConfig implements WebMvcConfigurer {
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/**")
                 .addResourceLocations("classpath:/static/");
+    }
+
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(xssInterceptor)
+                .addPathPatterns("/banking/**");
     }
 }

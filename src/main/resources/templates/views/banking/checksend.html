@@ -48,7 +48,7 @@
             </tr>
             <tr>
                 <td style="background-color:#fafafa;">(6)이체금액 : </td>
-                <td th:text="${checkData.myaccbalance != 0 ? #numbers.formatInteger(checkData.myaccbalance, 3, 'COMMA')+'원':'0원'}"></td>
+                <td th:text="${checkData.myaccbalance == 0 ? #numbers.formatInteger(checkData.myaccbalance, 3, 'COMMA')+'원':'0원'}"></td>
             </tr>
             <tr>
                 <td style="background-color:#fafafa;">(7)받는통장메모 : </td>
