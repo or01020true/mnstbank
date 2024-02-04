@@ -149,11 +149,18 @@ public class BankingController {
     }
 
     @PostMapping("sendBank")
-    ModelAndView sendBank(SendBanking sendBanking, HttpServletRequest request) {
+    ModelAndView sendBank(SendBanking sendBanking, HttpServletRequest request, HttpSession session) {
         ModelAndView mav = new ModelAndView("banking/alert");
         String msg = "";
+        User user = (User)session.getAttribute("user");
+        Banking checkBanking = bankingMapper.myid(user.getMyid()).get(0);
+        if (checkBanking.getMyacc() != sendBanking.getMyacc()) {
+            msg = "조작하지 마세요.";
+            mav.addObject("msg", msg);
+            return mav;
+        }
 
-        System.out.println(sendBanking.getMyaccbalance());
+//        System.out.println(sendBanking.getMyaccbalance());
 
         if (!sendBanking.getCsrfToken().equals(csrfToken)) {
             msg = "조작하지 마세요.";
