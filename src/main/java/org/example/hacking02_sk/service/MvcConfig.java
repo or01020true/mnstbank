@@ -1,9 +1,13 @@
 package org.example.hacking02_sk.service;
 
+import java.io.IOException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
@@ -78,6 +82,14 @@ public class MvcConfig implements WebMvcConfigurer {
         return resolver;
     }
 
+    
+    @Bean
+    public CommonsMultipartResolver multipartResolver() throws IOException {
+        CommonsMultipartResolver resolver = new CommonsMultipartResolver();
+        resolver.setMaxUploadSize(10 * 1024 * 1024);
+        return resolver;
+    }
+    
     // 위에서 Jsp, Thymeleaf View Resolver가 작동할 수 있게 Registry에 저장
     @Override
     public void configureViewResolvers(ViewResolverRegistry registry) {
@@ -92,9 +104,13 @@ public class MvcConfig implements WebMvcConfigurer {
                 .addResourceLocations("classpath:/static/");
     }
 
+    
+    
+    
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(xssInterceptor)
                 .addPathPatterns("/banking/**");
     }
+    
 }

@@ -4,16 +4,27 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.Scanner;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import org.example.hacking02_sk.service.S3Uploader;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestPart;
+import org.springframework.web.multipart.MultipartFile;
+import org.example.hacking02_sk.model.ImageModify;
+import org.example.hacking02_sk.model.User;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
+@RequestMapping("banner")
 public class GoController {
+	private final S3Uploader s3Uploader = null;
 
     @GetMapping("/go")
     public void redirectToUrl(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -53,4 +64,35 @@ public class GoController {
             response.sendError(HttpServletResponse.SC_BAD_REQUEST, "URL parameter is missing");
         }
     }
+
+ 
+    // 관리자
+ 	@GetMapping("modify")
+ 	public String modify(Model model, HttpServletRequest request) {
+ 		HttpSession session = request.getSession(false);
+    	if (session != null) {
+            User user = (User) session.getAttribute("user");
+            if (user != null) {
+    		    model.addAttribute("name", user.getMyname());
+            }
+        }
+ 		return "member/modify";
+ 	}
+ 	
+    @PostMapping("modify2")
+    public String create(
+        ImageModify imageModify){
+    	System.out.println(imageModify.getInputimage().getOriginalFilename());
+        String fileName = "";
+//        if(multipartFile != null){ // 파일 업로드한 경우에만
+//            
+//            try{// 파일 업로드
+//                fileName = s3Uploader.upload(multipartFile, "mnst-images"); // S3 버킷의 images 디렉토리 안에 저장됨
+//                System.out.println("fileName = " + fileName);
+//            }catch (Exception e){
+//            	e.getMessage();
+//            }
+//            }
+        return "member/modify";
+        }
 }
