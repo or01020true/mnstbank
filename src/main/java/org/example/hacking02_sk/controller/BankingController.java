@@ -149,11 +149,25 @@ public class BankingController {
     }
 
     @PostMapping("sendBank")
-    ModelAndView sendBank(SendBanking sendBanking, HttpServletRequest request) {
+    ModelAndView sendBank(SendBanking sendBanking, HttpServletRequest request, HttpSession session) {
         ModelAndView mav = new ModelAndView("banking/alert");
         String msg = "";
+        User user = (User)session.getAttribute("user");
+        Banking checkBanking = bankingMapper.myid(user.getMyid()).get(0);
+        if (checkBanking.getMyacc() != sendBanking.getMyacc()) {
+            msg = "조작하지 마세요.";
+            mav.addObject("msg", msg);
+            return mav;
+        }
+
+//        System.out.println(sendBanking.getMyaccbalance());
 
         if (!sendBanking.getCsrfToken().equals(csrfToken)) {
+            msg = "조작하지 마세요.";
+            mav.addObject("msg", msg);
+            return mav;
+        }else if (sendBanking.getMyaccbalance() < 0 || String.valueOf(sendBanking.getMyaccbalance()).contains("-")) {
+//            System.out.println(sendBanking.getMyaccbalance());
             msg = "조작하지 마세요.";
             mav.addObject("msg", msg);
             return mav;
@@ -192,11 +206,7 @@ public class BankingController {
             mav.addObject("msg", msg);
             return mav;
         }else if (sendBanking.getMyaccbalance() == 0) {
-            msg = "0원은 이체할 수 없습니다.";
-            mav.addObject("msg", msg);
-            return mav;
-        }else if (sendBanking.getMyaccbalance() > 0) {
-            msg = "금액은 0원 이상이어야 합니다.";
+            msg = "금액을 제대로 입력해주세요.";
             mav.addObject("msg", msg);
             return mav;
         }
@@ -267,12 +277,19 @@ public class BankingController {
 
     @PostMapping("detailhistory")
     String detailhistory(DetailHistory detailHistory, HttpSession session, Model model) {
-        if (detailHistory.getKeyword() != null) {
-            model.addAttribute("msg", "조작하지 마세요.");
-            return "banking/alert";
-        }else if (!detailHistory.getCsrfToken().equals(csrfToken)) {
-            model.addAttribute("msg", "조작하지 마세요.");
-            return "banking/alert";
+        if (detailHistory.getCheckSearch() == 1) {
+            if (detailHistory.getKeyword() == null || detailHistory.getKeyword().strip().equals("")) {
+                model.addAttribute("msg", "조작하지 마세요.");
+                return "banking/alert";
+            }else if (!detailHistory.getCsrfToken().equals(csrfToken)) {
+                model.addAttribute("msg", "조작하지 마세요.");
+                return "banking/alert";
+            }
+        }else {
+            if (!detailHistory.getCsrfToken().equals(csrfToken)) {
+                model.addAttribute("msg", "조작하지 마세요.");
+                return "banking/alert";
+            }
         }
 
         if (detailHistory.getKeyword() != null) {

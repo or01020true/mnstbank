@@ -48,6 +48,7 @@
 		        <tr>
 		            <form action="/banking/detailhistory" method="post">
 						<input type="hidden" name="csrfToken" th:value="${csrfToken}">
+						<input type="hidden" name="checkSearch" value="1">
 		                <td colspan="4">
 		                    <input type="text" class="form-control" name="keyword" style="margin: 0 auto;"
 		                    	placeholder="받는통장메모 혹은 내통장메모를 입력해주세요." />
@@ -165,14 +166,16 @@
 	                <tr th:each="hist:${session.historys}">
 	                    <td th:text="${#dates.format(hist.myaccdate)}"></td>
 	                    <td>
-	                        <th:block th:if="${hist.myaccout == 0}" th:text="#{0}">
+	                        <th:block th:if="${hist.myaccout == 0}">
+								0
 	                        </th:block>
 	                        <th:block th:unless="${hist.myaccout == 0}"
 									  th:text="${#numbers.formatInteger(hist.myaccbalance, 3, 'COMMA')}">
 	                        </th:block>
 	                    </td>
 	                    <td>
-	                        <th:block th:if="${hist.myaccin == 0}" th:text="#{0}">
+	                        <th:block th:if="${hist.myaccin == 0}">
+								0
 	                        </th:block>
 	                        <th:block th:unless="${hist.myaccin == 0}"
 									  th:text="${#numbers.formatInteger(hist.myaccbalance, 3, 'COMMA')}">
