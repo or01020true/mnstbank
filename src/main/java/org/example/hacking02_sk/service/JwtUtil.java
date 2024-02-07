@@ -2,46 +2,70 @@ package org.example.hacking02_sk.service;
 
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.Claims;
 import java.util.Date;
 import org.springframework.stereotype.Service;
+import org.example.hacking02_sk.model.User;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
 
 @Service
 public class JwtUtil {
     private static final String SECRET_KEY = "sesac1MONEYST1team1secret1key1yek1terces1maet1TSYENOM1cases";
+	private static final boolean JWT_MODE = false; // true = jwt auth, false = session auth 
 
-    public String generateToken(String userId) {
+    public String setToken(String userId, int time) {
+		Date now = new Date();
         return Jwts.builder()
-                .setSubject(userId)
-                .signWith(SignatureAlgorithm.HS256, SECRET_KEY)
+                .setHeaderParam("type", "jwt")
+                .claim("userId", userId)
+				// .setIssuedAt(now)
+				// .setExpiration(new Date(System.currentTimeMillis() + (1000 * time)))
+				.signWith(SignatureAlgorithm.HS256, SECRET_KEY)
                 .compact();
     }
 
-	public boolean validateToken(String token) {
-		try {
-			Jwts.parser().setSigningKey(SECRET_KEY).parseClaimsJws(token);
-			return true;
-		} catch (Exception e) {
-			return false;
-		}
+	public String getToken(Cookie[] cookies) {
+		String jwt = null;
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                if (cookie.getName().equals("JWT")) {
+                    jwt = cookie.getValue();
+					break;
+                }
+            }
+        }
+		return jwt;
+ 	}
+
+	public boolean removeToken(Cookie[] cookies, HttpServletResponse response) {
+		boolean result = false;
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+				if(cookie.getName().equals("JWT")) {
+					cookie.setMaxAge(0);
+					cookie.setPath("/");
+					response.addCookie(cookie);
+					result = true;
+					break;
+				}
+            }
+        }
+		return result;
 	}
 
-    /*
-		public static <T> T extractClaim(String token, Function<Claims, T> claimsResolver) {
-			final Claims claims = Jwts.parser().setSigningKey(SECRET_KEY).parseClaimsJws(token).getBody();
-			return claimsResolver.apply(claims);
-		}
+	private String getData(String jwt, String key) throws Exception {
+		Claims claims = Jwts.parser().setSigningKey(SECRET_KEY).parseClaimsJws(jwt).getBody();
+		return (String)claims.get(key);
+	}
 
-		public static String extractUserId(String token) {
-			return extractClaim(token, Claims::getSubject);
-		}
-
-		public boolean validateToken(String token) {
-			try {
-				Jwts.parser().setSigningKey(SECRET_KEY).parseClaimsJws(token);
-				return true;
-			} catch (Exception e) {
-				return false;
-			}
-		}
-		*/
+	public String extractUserId(String jwt) {
+		String userId = null;
+		try {
+			userId = getData(jwt, "userId");
+		} catch (Exception e) {
+			e.printStackTrace();
+ 		}
+		return userId;
+	}
 }

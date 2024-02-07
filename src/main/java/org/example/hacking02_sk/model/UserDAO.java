@@ -21,18 +21,22 @@ public class UserDAO {
 	private PreparedStatement pstmt2;
 	private ResultSet rs;
 
-//	@Autowired
-//	public UserDAO(DataSource dataSource) {
-//		try {
-////			String dbURL = "jdbc:mysql://localhost:3306/myhacking";
-////			String dbID = "myhack";
-////			String dbPassword = "1234";
-////			Class.forName("com.mysql.cj.jdbc.Driver");
-//			conn = dataSource.getConnection();
-//		} catch(Exception e) {
-//			e.printStackTrace();
-//		}
-//	}
+	//메인페이지 이름
+	public String getName(String myid) {
+		String myName = null;
+		String SQL = "SELECT myname FROM myuser WHERE myid = ?";
+		try {
+			pstmt = MyDBConnection.getConnection().prepareStatement(SQL);
+			pstmt.setString(1, myid);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				myName = rs.getString(1);
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return myName;
+	}
 	
 	//로그인
 	public int login(String myid, String mypw) {

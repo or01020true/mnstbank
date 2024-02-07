@@ -212,25 +212,22 @@ public class BankingController {
         }
 
         // JWT validation - start
-        boolean jwt_validation = false;
-        String debug_jwt = "";
+        String jwt = null;
         Cookie[] cookies = request.getCookies();
         if (cookies != null) {
             for (Cookie cookie : cookies) {
                 if (cookie.getName().equals("JWT")) {
-                    debug_jwt = cookie.getValue();  // hy debug
-                    jwt_validation = jwtUtil.validateToken(cookie.getValue());
+                    jwt = jwtUtil.getToken(request.getCookies());
                 }
             }
         }
 
-        if (!jwt_validation) {
-            System.out.println("(hy debug) JWT 인증실패 : " + debug_jwt);
-            msg = "유효하지 않은 JWT입니다.";
+        if (jwt == null) {
+            msg = "JWT가 존재하지 않습니다.";
             mav.addObject("msg", msg);
             return mav;
         } else {
-            System.out.println("(hy debug) JWT 인증성공 : " + debug_jwt);
+            System.out.println("(hy debug) JWT 인증성공 : " + jwt);
         }
         // JWT validation - end
 

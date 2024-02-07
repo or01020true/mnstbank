@@ -143,7 +143,7 @@ public class UserController {
 			session.setAttribute("user", user);
 			session.setMaxInactiveInterval(session_time_seconds);
 
-			String jwtToken = jwtUtil.generateToken(user.getMyid());
+			String jwtToken = jwtUtil.setToken(user.getMyid(), session_time_seconds);
 			Cookie cookie = new Cookie("JWT", jwtToken);
 			cookie.setMaxAge(session_time_seconds);
 			cookie.setPath("/");
@@ -190,18 +190,11 @@ public class UserController {
 			mav.addObject("message", "로그아웃 하였습니다.");
 
 			// 모든 쿠키 삭제
-			Cookie[] cookies = request.getCookies();
-			if (cookies != null) {
-				for (Cookie cookie : cookies) {
-					if(cookie.getName().equals("JWT"))
-					{
-						cookie.setMaxAge(0);
-						cookie.setPath("/");
-						System.out.println("(hy debug) Remove cookie : " + cookie.getValue());
-						response.addCookie(cookie);
-					}
-				}
-			}
+			if (jwtUtil.removeToken(request.getCookies(), response)) {
+				System.out.println("(hy debug) Remove cookie.");
+			} else {
+				System.out.println("(hy debug) Not remove cookie.");
+ 			}
 		}
 		mav.setViewName("/member/logout");
 		return mav;
