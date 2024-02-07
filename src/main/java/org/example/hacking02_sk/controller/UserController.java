@@ -123,13 +123,34 @@ public class UserController {
     }
 	
     // 로그인
+	// @RequestMapping("login")
+	// public String login() {
+	// 	return "member/login";
+	// }
+
 	@RequestMapping("login")
-	public String login() {
-		return "member/login";
+	public ModelAndView login(HttpServletRequest request) {
+		ModelAndView mav = new ModelAndView();
+		String jwt = jwtUtil.getToken(request.getCookies());
+		if (jwt == null || !jwtUtil.validateToken(jwt)) {
+			mav.setViewName("/member/login");
+		} else {
+			HttpSession session = request.getSession(false);
+			if (session == null) {
+				session = request.getSession(false);
+			}
+			User user = (User) session.getAttribute("user");
+			if (user == null) {
+				int session_time_seconds = 1800;
+				user = userDAO.getUser(user.getMyid());
+				session.setAttribute("user", user);
+				session.setMaxInactiveInterval(session_time_seconds);
+			}
+			mav.setViewName("redirect:/");
+		}
+		return mav;
 	}
 	
-	HashMap<String, String> sessions = new HashMap<String, String>();
-
     @PostMapping("login")
 	public ModelAndView loginAction(User user, HttpServletRequest request, HttpServletResponse response) {
     	ModelAndView mav = new ModelAndView();
@@ -139,7 +160,7 @@ public class UserController {
         if (result == 1) { //로그인 성공
 			int session_time_seconds = 1800;
 			HttpSession session = request.getSession();
-			user = userDAO.getUser(user.getMyid(), user.getMypw());
+			user = userDAO.getUser(user.getMyid());
 			session.setAttribute("user", user);
 			session.setMaxInactiveInterval(session_time_seconds);
 
@@ -150,7 +171,6 @@ public class UserController {
 			System.out.println("(hy debug) Add cookie : " + cookie.getValue());
 
 			response.addCookie(cookie);
-			sessions.put(session.getId(), ((User)(session.getAttribute("user"))).getMyname());
 			mav.setViewName("redirect:/");
 			return mav;
         }
@@ -184,32 +204,14 @@ public class UserController {
 			mav.addObject("message", "세션이 만료되었습니다.");
 		}
 		else { // 로그아웃 시도
-			if (session.getAttribute("user") != null)
-				sessions.remove(session.getId());
+			// 세션 만료
 			session.invalidate();
+			// JWT 쿠키 삭제
+			jwtUtil.removeToken(request.getCookies(), response);
 			mav.addObject("message", "로그아웃 하였습니다.");
-
-			// 모든 쿠키 삭제
-			if (jwtUtil.removeToken(request.getCookies(), response)) {
-				System.out.println("(hy debug) Remove cookie.");
-			} else {
-				System.out.println("(hy debug) Not remove cookie.");
- 			}
 		}
 		mav.setViewName("/member/logout");
 		return mav;
-	}
-
-	// test
-	@RequestMapping("/sessions")
-	@ResponseBody
-	public String sessionList() {
-		StringBuilder sb = new StringBuilder("{");
-		for(String key : sessions.keySet()) {
-			sb.append(key + " : " + sessions.get(key) + "\n");
-		}
-		sb.append("}");
-		return sb.toString();
 	}
     
     // 주소 검색

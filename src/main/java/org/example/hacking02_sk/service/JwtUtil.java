@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 @Service
 public class JwtUtil {
     private static final String SECRET_KEY = "sesac1MONEYST1team1secret1key1yek1terces1maet1TSYENOM1cases";
-	private static final boolean JWT_MODE = false; // true = jwt auth, false = session auth 
+	public static final boolean JWT_MODE = false; // true = jwt auth, false = session auth 
 
     public String setToken(String userId, int time) {
 		Date now = new Date();
@@ -23,6 +23,16 @@ public class JwtUtil {
 				// .setExpiration(new Date(System.currentTimeMillis() + (1000 * time)))
 				.signWith(SignatureAlgorithm.HS256, SECRET_KEY)
                 .compact();
+    }
+
+	public boolean validateToken(String jwt) {
+        try {
+            Jwts.parser().setSigningKey(SECRET_KEY).parseClaimsJws(jwt);
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
 	public String getToken(Cookie[] cookies) {

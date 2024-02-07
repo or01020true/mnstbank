@@ -156,13 +156,12 @@ public class UserDAO {
     	return -1; // Error
     }
     
-	public User getUser(String myid, String mypw) {
+	public User getUser(String myid) {
 		User user = null;
-		String SQL = "SELECT myname, myid, mypw, myemail, mylocation, myphone, mysid FROM myuser WHERE myid = ? AND mypw = ?";
+		String SQL = "SELECT myname, myid, mypw, myemail, mylocation, myphone, mysid FROM myuser WHERE myid = ?";
 		try {
 			pstmt = MyDBConnection.getConnection().prepareStatement(SQL);
 			pstmt.setString(1, myid);
-			pstmt.setString(2, mypw);
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
 				user = new User();

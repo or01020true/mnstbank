@@ -216,7 +216,7 @@ public class BankingController {
         Cookie[] cookies = request.getCookies();
         if (cookies != null) {
             for (Cookie cookie : cookies) {
-                if (cookie.getName().equals("JWT")) {
+                if (cookie.getName().equals("JWT") && jwtUtil.validateToken(cookie.getValue())) {
                     jwt = jwtUtil.getToken(request.getCookies());
                 }
             }

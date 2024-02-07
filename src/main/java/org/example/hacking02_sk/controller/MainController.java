@@ -24,7 +24,7 @@ public class MainController {
     @RequestMapping("/")
     String index(Model model, HttpServletRequest request){
         String jwt = jwtUtil.getToken(request.getCookies());
-    	if (jwt != null) {
+    	if (jwt != null && jwtUtil.validateToken(jwt)) {
             String userName = userDAO.getName(jwtUtil.extractUserId(jwt));
             if (userName != null) {
     		    model.addAttribute("name", userName);
