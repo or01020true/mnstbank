@@ -3,7 +3,7 @@ current_path=$(pwd)
 webwas_container_name=$1
 if [ -z "$webwas_container_name" ]; then # not use docker
     gradle build
-    mv -f ${current_path}/build/libs/vas1-0.0.1-SNAPSHOT-plain.war ${current_path}/ROOT.war
+    cp -f ${current_path}/build/libs/vas1-0.0.1-SNAPSHOT-plain.war ${current_path}/ROOT.war
     # sudo echo "$0 로컬 tomcat 이용"
     # local_tomcat_path=/usr/local/tomcat/apache-tomcat-8.0.53
     # sudo ${local_tomcat_path}/bin/shutdown.sh
