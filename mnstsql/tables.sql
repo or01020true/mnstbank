@@ -61,15 +61,15 @@ insert into myboard(mydate, mypriority, myreadcount, mycontent, myip,  myid, mys
 # myacchistory 테이블에 데이터 추가
 INSERT INTO myacchistory (myacc, mysendbank, mysendacc, myaccin, myaccout, myaccbalance, myaccioname, myaccmemo)
 VALUES 
-('7193aa59f58433ffb9576f18d201c614bc66c62f178c5891620693c0aa873d74', 'MNST', '0eca208a206085d0c001bae43a175c0955af17be18d168fc0ab85a3822850735', 0, 99999000, 10000, 'send1', 'Receive1'),
-('0eca208a206085d0c001bae43a175c0955af17be18d168fc0ab85a3822850735', 'MNST', '7193aa59f58433ffb9576f18d201c614bc66c62f178c5891620693c0aa873d74', 200010000, 0, 10000, 'send1', ''),
-('73430ed60859abd0e87c38ffb44d0e7232d6749f11a29e35ff776a78a1449f36', 'MNST', 'c49179047a3e51690db26476f88e98dc034f48761d8895b501859d65bef5ac65', 0, 299985000, 15000, 'send2', 'Receive2'),
-('c49179047a3e51690db26476f88e98dc034f48761d8895b501859d65bef5ac65', 'MNST', '73430ed60859abd0e87c38ffb44d0e7232d6749f11a29e35ff776a78a1449f36', 400015000, 0, 15000, 'send2', ''),
-('ecc1a72bec56fb08d33f84758bf9061b00660a8bbc718d547f1ce2b3df2da864', 'MNST', '137802c9adc063e71f2b8f97175c42f0bcd3fb047c85e068805e460d4145765d', 0, 499980000, 20000, 'send3', 'Receive3'),
-('137802c9adc063e71f2b8f97175c42f0bcd3fb047c85e068805e460d4145765d', 'MNST', 'ecc1a72bec56fb08d33f84758bf9061b00660a8bbc718d547f1ce2b3df2da864', 600020000, 0, 20000, 'send3', ''),
-('e6ed66d4fcc5fb129f28cec3466a3410744a2e05113e28644cd3f79f2150cb28', 'MNST', '1e23b64fcaffd67d17f2b465da4ec8ad9e1af0d79ce39730d7e0bb4840e10e27', 0, 699975000, 25000, 'send4', 'Receive4'),
-('1e23b64fcaffd67d17f2b465da4ec8ad9e1af0d79ce39730d7e0bb4840e10e27', 'MNST', 'e6ed66d4fcc5fb129f28cec3466a3410744a2e05113e28644cd3f79f2150cb28', 800025000, 0, 25000, 'send4', ''),
-('369459dbf0d852e204916ce16b69f180e527058e735dd584b803e9822eaf6a34', 'MNST', '4cc272b6448f5a8915d2ad02d11fe05fa5834ade0a9bb31fd18d2ff243465fb0', 0, 899970000, 30000, 'send5', 'Receive5'),
-('4cc272b6448f5a8915d2ad02d11fe05fa5834ade0a9bb31fd18d2ff243465fb0', 'MNST', '369459dbf0d852e204916ce16b69f180e527058e735dd584b803e9822eaf6a34', 130000, 0, 30000, 'send5', ''),
-('7193aa59f58433ffb9576f18d201c614bc66c62f178c5891620693c0aa873d74', 'MNST', 'ecc1a72bec56fb08d33f84758bf9061b00660a8bbc718d547f1ce2b3df2da864', 0, 99964000, 35000, 'send6', 'Receive6'),
-('ecc1a72bec56fb08d33f84758bf9061b00660a8bbc718d547f1ce2b3df2da864', 'MNST', '7193aa59f58433ffb9576f18d201c614bc66c62f178c5891620693c0aa873d74', 200045000, 0, 35000, 'send6', '');
+('Yd5HQVDiTY/R0oCDId+hwQ==', 'MNST', 'pAQ29e/J3enWjGf1GtXrvg==', 0, 99999000, 10000, 'send1', 'Receive1'),
+('pAQ29e/J3enWjGf1GtXrvg==', 'MNST', 'Yd5HQVDiTY/R0oCDId+hwQ==', 200010000, 0, 10000, 'send1', ''),
+('ZqXteAtg0nHQ46aVQYHVJw==', 'MNST', 'ExqA6MoAMnIBJwvzHHsVUw==', 0, 299985000, 15000, 'send2', 'Receive2'),
+('ExqA6MoAMnIBJwvzHHsVUw==', 'MNST', 'ZqXteAtg0nHQ46aVQYHVJw==', 400015000, 0, 15000, 'send2', ''),
+('JQNaGkJ4+g9yxWsennA7aw==', 'MNST', 'FrRbOg/blAPoFz0sPdUanA==', 0, 499980000, 20000, 'send3', 'Receive3'),
+('FrRbOg/blAPoFz0sPdUanA==', 'MNST', 'JQNaGkJ4+g9yxWsennA7aw==', 600020000, 0, 20000, 'send3', ''),
+('7Vb5hpyHYYh2vGf2+6t4hg==', 'MNST', 'mrXa6xjGAUhrji7Wk/hcJQ==', 0, 699975000, 25000, 'send4', 'Receive4'),
+('mrXa6xjGAUhrji7Wk/hcJQ==', 'MNST', '7Vb5hpyHYYh2vGf2+6t4hg==', 800025000, 0, 25000, 'send4', ''),
+('mSmy7dvFBDnDadpsY79eag==', 'MNST', 'RuW9A/1jW3vWf5aaABN3qw==', 0, 899970000, 30000, 'send5', 'Receive5'),
+('RuW9A/1jW3vWf5aaABN3qw==', 'MNST', 'mSmy7dvFBDnDadpsY79eag==', 130000, 0, 30000, 'send5', ''),
+('Yd5HQVDiTY/R0oCDId+hwQ==', 'MNST', 'JQNaGkJ4+g9yxWsennA7aw==', 0, 99964000, 35000, 'send6', 'Receive6'),
+('JQNaGkJ4+g9yxWsennA7aw==', 'MNST', 'Yd5HQVDiTY/R0oCDId+hwQ==', 200045000, 0, 35000, 'send6', '');
