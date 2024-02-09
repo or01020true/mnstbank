@@ -1,41 +1,10 @@
-// javac -encoding UTF-8 EncryptAcc.java && java EncryptAcc
-
+// javac -encoding UTF-8 Encrypt.java EncryptAcc.java && java EncryptAcc
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 public class EncryptAcc {
-
-    public static String hashMD5(String input) throws NoSuchAlgorithmException {
-        MessageDigest md = MessageDigest.getInstance("MD5");
-        byte[] mdBytes = md.digest(input.getBytes());
-
-        StringBuilder hexString = new StringBuilder();
-        for (byte mdByte : mdBytes) {
-            String hex = Integer.toHexString(0xff & mdByte);
-            if (hex.length() == 1)
-                hexString.append('0');
-            hexString.append(hex);
-        }
-
-        return hexString.toString();
-    }
-
-    public static String hashSHA256(String input) throws NoSuchAlgorithmException {
-        MessageDigest md = MessageDigest.getInstance("SHA-256");
-        byte[] mdBytes = md.digest(input.getBytes());
-
-        StringBuilder hexString = new StringBuilder();
-        for (byte mdByte : mdBytes) {
-            String hex = Integer.toHexString(0xff & mdByte);
-            if (hex.length() == 1)
-                hexString.append('0');
-            hexString.append(hex);
-        }
-
-        return hexString.toString();
-    }
 
     public static void main(String[] args) {
         try {
@@ -49,9 +18,14 @@ public class EncryptAcc {
             while ((line = reader.readLine()) != null) {
                 if (!line.trim().startsWith("INSERT INTO")) {
                     // 암호화할 값 추출
-                    String[] values = line.split(",");
-                    String myacc = values[0].trim().substring(1).replaceAll("[']", "");
-                    String myaccpw = values[4].trim().replaceAll("[']", "");
+                    int[] split_indexes = new int[7];
+                    split_indexes[0] = line.indexOf("(");
+                    split_indexes[split_indexes.length - 1] = line.lastIndexOf(")");
+                    for (int i = 1; i < split_indexes.length - 1; ++i) {
+                        split_indexes[i] = line.indexOf(',', split_indexes[i - 1] + 1);
+                    }
+                    String myacc = line.substring(split_indexes[0] + 2, split_indexes[1] - 1);
+                    String myaccpw = line.substring(split_indexes[4] + 2, split_indexes[5] - 1);
 
                     if (myacc.length() != 10)
                         System.out.println("Wrong Phone" + myacc);
@@ -59,18 +33,17 @@ public class EncryptAcc {
                         System.out.println("Wrong Sid" + myaccpw);
 
                     // 암호화 수행
-                    String encryptedAccount = hashSHA256(myacc);
-                    String encryptedPassword = hashMD5(myaccpw);
+                    String encryptedAccount = Encrypt.encryptAES(myacc);
+                    String encryptedPassword = Encrypt.hashMD5(myaccpw);
 
                     // 원래 SQL 문을 그대로 유지하면서 암호화된 값으로 치환하여 새로운 파일에 쓰기
-                    line = line.replace(myacc, encryptedAccount);
-                    line = line.replace(myaccpw, encryptedPassword);
+                    line = line.substring(0, split_indexes[0] + 2) + encryptedAccount + line.substring(split_indexes[1] - 1, split_indexes[4] + 2) + encryptedPassword + line.substring(split_indexes[5] - 1);
                 }
 
                 writer.write(line);
                 writer.newLine();
             }
-
+            
             reader.close();
             writer.close();
 

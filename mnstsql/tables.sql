@@ -11,8 +11,8 @@ create table if not exists myuser(
 	mypw varchar(32),
 	myemail varchar(50),
 	mylocation varchar(300),
-	myphone varchar(64),
-	mysid varchar(64)
+	myphone varchar(24),
+	mysid varchar(24)
 );
 
 create table if not exists myboard(
@@ -28,7 +28,7 @@ create table if not exists myboard(
 );
 
 create table if not exists myacc(
-	myacc varchar(64) primary key,
+	myacc varchar(24) primary key,
 	myid varchar(20),
 	mymoney int,
 	mybank varchar(30),
