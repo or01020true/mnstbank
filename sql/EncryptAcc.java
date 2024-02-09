@@ -1,4 +1,4 @@
-// javac -encoding UTF-8 EncryptAcc.java
+// javac -encoding UTF-8 EncryptAcc.java && java EncryptAcc
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
