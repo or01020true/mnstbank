@@ -12,7 +12,8 @@ create table if not exists myuser(
 	myemail varchar(50),
 	mylocation varchar(300),
 	myphone varchar(24),
-	mysid varchar(24)
+	mysid varchar(24),
+	mylevel int default 0
 );
 
 create table if not exists myboard(

@@ -18,7 +18,7 @@ public class EncryptUser {
             while ((line = reader.readLine()) != null) {
                 if (!line.trim().startsWith("INSERT INTO")) {
                     // 암호화할 값 추출
-                    int[] split_indexes = new int[8];
+                    int[] split_indexes = new int[9];
                     split_indexes[0] = line.indexOf("(");
                     split_indexes[split_indexes.length - 1] = line.lastIndexOf(")");
                     for (int i = 1; i < split_indexes.length - 1; ++i) {
