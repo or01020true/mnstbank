@@ -9,6 +9,6 @@ import org.example.hacking02_sk.model.SendBanking;
 public interface BankinghistMapper {
     List<SendBanking> history(DetailHistory detailHistory);
     List<SendBanking> searchmemo(String keyword);
-    SendBanking sendbanking(int myacc);
+    SendBanking sendbanking(String myacc);
     int insert(SendBanking sendBanking);
 }

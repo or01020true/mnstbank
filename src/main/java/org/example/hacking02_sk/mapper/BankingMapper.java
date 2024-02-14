@@ -8,7 +8,7 @@ import org.example.hacking02_sk.model.SendBanking;
 @Mapper
 public interface BankingMapper {
     List<Banking> myid(String myid);
-    Banking myacc(int myacc);
+    Banking myacc(String myacc);
     int addmoney(SendBanking sendBanking);
     int submoney(SendBanking sendBanking);
 }

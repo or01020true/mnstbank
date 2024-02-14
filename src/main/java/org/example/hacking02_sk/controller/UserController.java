@@ -137,12 +137,12 @@ public class UserController {
 		} else {
 			HttpSession session = request.getSession(false);
 			if (session == null) {
-				session = request.getSession(false);
+				session = request.getSession();
 			}
 			User user = (User) session.getAttribute("user");
 			if (user == null) {
 				int session_time_seconds = 1800;
-				user = userDAO.getUser(user.getMyid());
+				user = userDAO.getUser(jwtUtil.extractUserId(jwt));
 				session.setAttribute("user", user);
 				session.setMaxInactiveInterval(session_time_seconds);
 			}
@@ -164,7 +164,7 @@ public class UserController {
 			session.setAttribute("user", user);
 			session.setMaxInactiveInterval(session_time_seconds);
 
-			String jwtToken = jwtUtil.setToken(user.getMyid(), session_time_seconds);
+			String jwtToken = jwtUtil.setToken(user.getMyid(), user.getMylevel(), session_time_seconds);
 			Cookie cookie = new Cookie("JWT", jwtToken);
 			cookie.setMaxAge(session_time_seconds);
 			cookie.setPath("/");

@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.example.hacking02_sk.model.User;
+import org.example.hacking02_sk.service.JwtUtil;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -28,6 +29,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class S3Controller {
     @Autowired
 	private S3Uploader s3Uploader;
+
+    @Autowired
+    private JwtUtil jwtUtil;
 
     @GetMapping("preview")
     public void redirectToUrl(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -73,10 +77,11 @@ public class S3Controller {
     // 관리자
  	@GetMapping("modify")
  	public String modify(Model model, HttpServletRequest request) {
+        /*
  		HttpSession session = request.getSession();
     	if (session != null) {
             User user = (User) session.getAttribute("user");
-            if (!user.getMyid().equals("admin")) {
+            if (user.getMylevel().equals("0")) {
                 model.addAttribute("msg", "관리자만 접근 가능합니다.");
                 return "banking/alert";
             }
@@ -84,6 +89,15 @@ public class S3Controller {
             if (user != null) {
     		    model.addAttribute("name", user.getMyname());
             }
+        }
+        */
+        String jwt = jwtUtil.getToken(request.getCookies());
+		if (jwt == null || !jwtUtil.validateToken(jwt)) {
+			model.addAttribute("msg", "JWT이 존재하지 않습니다..");
+            return "banking/alert";
+		} else if(jwtUtil.extractUserLevel(jwt).equals("0")) {
+            model.addAttribute("msg", "관리자만 접근 가능합니다.");
+            return "banking/alert";
         }
  		return "member/modify";
  	}

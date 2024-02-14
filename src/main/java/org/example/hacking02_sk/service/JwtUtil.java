@@ -14,13 +14,14 @@ public class JwtUtil {
     private static final String SECRET_KEY = "sesac1MONEYST1team1secret1key1yek1terces1maet1TSYENOM1cases";
 	public static final boolean JWT_MODE = false; // true = jwt auth, false = session auth 
 
-    public String setToken(String userId, int time) {
+    public String setToken(String userId, String userLevel, int time) {
 		Date now = new Date();
         return Jwts.builder()
                 .setHeaderParam("type", "jwt")
                 .claim("userId", userId)
-				// .setIssuedAt(now)
-				// .setExpiration(new Date(System.currentTimeMillis() + (1000 * time)))
+				.claim("userLevel", userLevel)
+				.setIssuedAt(now)
+				.setExpiration(new Date(System.currentTimeMillis() + (1000 * time)))
 				.signWith(SignatureAlgorithm.HS256, SECRET_KEY)
                 .compact();
     }
@@ -77,5 +78,15 @@ public class JwtUtil {
 			e.printStackTrace();
  		}
 		return userId;
+	}
+
+	public String extractUserLevel(String jwt) {
+		String userLevel = null;
+		try {
+			userLevel = getData(jwt, "userLevel");
+		} catch (Exception e) {
+			e.printStackTrace();
+ 		}
+		return userLevel;
 	}
 }
