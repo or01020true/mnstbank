@@ -10,7 +10,7 @@ import org.example.hacking02_sk.service.Encrypt;
 @Data
 public class Banking {
     public int mymoney;
-    public String myacc, myid, mybank, csrfToken, myaccpw;
+    public String myacc, myid, mybank, csrfToken, myaccpw, myaccDec;
     public Date myaccregdate;
     public SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
@@ -18,8 +18,7 @@ public class Banking {
         return sdf.format(myaccregdate);
     }
 
-    public String getDecMyacc() {  // decrypt
-        System.out.println("(hy debug) Banking class getDecMyacc() -> Encrypt.decryptAES(myacc) = " + Encrypt.decryptAES(this.myacc));
+    public String getMyaccDec() {
         return Encrypt.decryptAES(this.myacc);
     }
 }

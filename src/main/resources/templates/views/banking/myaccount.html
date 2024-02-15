@@ -23,7 +23,7 @@
 			<tbody>
 		        <tr th:each="acc:${accs}" th:id="|myacc${acc.myacc}|">
 		            <td style="background-color:#fafafa">계좌번호</td>
-		            <td th:text="${acc.myacc}"></td>
+		            <td th:text="${acc.myaccDec}"></td>
 		            <td style="background-color:#fafafa">잔액</td>
 		            <td th:text="${#numbers.formatInteger(acc.mymoney, 3, 'COMMA')}"></td>
 		        </tr>

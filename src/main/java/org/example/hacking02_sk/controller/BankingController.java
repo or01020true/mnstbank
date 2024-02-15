@@ -20,6 +20,7 @@ import org.example.hacking02_sk.model.DetailHistory;
 import org.example.hacking02_sk.model.MyCsrfToken;
 import org.example.hacking02_sk.model.SendBanking;
 import org.example.hacking02_sk.model.User;
+import org.example.hacking02_sk.service.Encrypt;
 import org.example.hacking02_sk.service.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -97,9 +98,10 @@ public class BankingController {
                 model.addAttribute("result", sendBanking);
             }else if (page.equals("acchistory")) {
                 List<SendBanking> sendBankings = new ArrayList<>();
-
                 for(Banking bank : bankList) {
                     SendBanking sendBanking = bankinghistMapper.sendbanking(bank.getMyacc());
+                    sendBanking.setMyacc(sendBanking.getMyaccDec());
+                    sendBanking.setMysendacc(sendBanking.getMysendaccDec());
                     if (sendBanking != null) {
                         sendBankings.add(sendBanking);
                     }
@@ -128,7 +130,7 @@ public class BankingController {
     @PostMapping("getmyacc")
     @ResponseBody
     Map<String, Integer> getmyacc(@RequestBody Map<String, String> myacc){
-        Banking bank = bankingMapper.myacc(Integer.parseInt(myacc.get("myacc")));
+        Banking bank = bankingMapper.myacc(Encrypt.encryptAES(myacc.get("myacc")));
         Map<String, Integer> acc = new HashMap<>();
         acc.put("money", bank.getMymoney());
         return acc;
@@ -154,7 +156,9 @@ public class BankingController {
         String msg = "";
         User user = (User)session.getAttribute("user");
         Banking checkBanking = bankingMapper.myid(user.getMyid()).get(0);
-        if (checkBanking.getMyacc() != sendBanking.getMyacc()) {
+        System.out.println(checkBanking.getMyacc());
+        System.out.println(sendBanking.getMyacc());
+        if (!checkBanking.getMyacc().equals(sendBanking.getMyacc())) {
             msg = "조작하지 마세요.";
             mav.addObject("msg", msg);
             return mav;
@@ -197,7 +201,7 @@ public class BankingController {
             msg = "잔고가 부족합니다.";
             mav.addObject("msg", msg);
             return mav;
-        }else if (!sendBanking.getMyaccpw().equals(banking.getMyaccpw())) {
+        }else if (!Encrypt.hashMD5(sendBanking.getMyaccpw()).equals(banking.getMyaccpw())) {
             msg = "비밀번호를 다시 입력해주세요.";
             mav.addObject("msg", msg);
             return mav;

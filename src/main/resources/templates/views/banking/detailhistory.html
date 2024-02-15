@@ -64,7 +64,7 @@
 		                <td style="background-color:#fafafa">조회계좌번호</td>
 		                <td colspan="4">
 		                    <select th:each="accs:${accList}" name="acc"  class="form-select" style="width:20%">
-		                        <option th:select="${accs.myacc eq myacc}" th:text="|${accs.myacc}[저축예금]|"
+		                        <option th:select="${accs.myacc eq myacc}" th:text="|${accs.myaccDec}[저축예금]|"
 		                        th:value="${accs.myacc}"></option>
 		                    </select>
 		                </td>

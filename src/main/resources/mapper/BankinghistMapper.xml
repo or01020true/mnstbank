@@ -26,7 +26,7 @@
             order by myaccdate asc
         </if>
     </select>
-    <select id="sendbanking" resultType="sendbank" parameterType="java.lang.Integer">
+    <select id="sendbanking" resultType="sendbank" parameterType="java.lang.String">
         select * from myacchistory where myacc = #{myacc} order by myaccdate desc limit 1;
     </select>
     <select id="searchmemo" resultType="sendbank" parameterType="java.lang.String">

@@ -13,22 +13,18 @@ public class SendBanking {
     Date myaccdate;
 
     public String getMyacc() {
-        System.out.println("(hy debug) SendBanking class getMyacc() -> myacc = " + myacc);
-        return myacc;
-    }
-
-    public String getDecMyacc() {
-        System.out.println("(hy debug) SendBanking class getdecMyacc() -> Encrypt.decryptAES(this.myacc) = " + Encrypt.decryptAES(this.myacc));
-        return Encrypt.decryptAES(this.myacc);
+        return Encrypt.encryptAES(this.myacc);
     }
 
     public String getMysendacc() {
-        System.out.println("(hy debug) SendBanking class getMysendacc() -> mysendacc = " + mysendacc);
-        return mysendacc;
+        return Encrypt.encryptAES(this.mysendacc);
     }
 
-    public String getDecMysendacc() {
-        System.out.println("(hy debug) SendBanking class getdecMysendacc() -> Encrypt.decryptAES(this.mysendacc) = " + Encrypt.decryptAES(this.mysendacc));
+    public String getMyaccDec() {
+        return Encrypt.decryptAES(this.myacc);
+    }
+
+    public String getMysendaccDec() {
         return Encrypt.decryptAES(this.mysendacc);
     }
 }
