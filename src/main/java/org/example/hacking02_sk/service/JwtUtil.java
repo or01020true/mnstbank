@@ -19,7 +19,6 @@ public class JwtUtil {
         return Jwts.builder()
                 .setHeaderParam("type", "jwt")
                 .claim("userId", userId)
-				.claim("userLevel", userLevel)
 				.setIssuedAt(now)
 				.setExpiration(new Date(System.currentTimeMillis() + (1000 * time)))
 				.signWith(SignatureAlgorithm.HS256, SECRET_KEY)

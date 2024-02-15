@@ -88,31 +88,49 @@
         var newWindow = null;
         // 변경사항 적용 함수
         function confirmApply() {
-            // 이미지 업로드 후 팝업 닫기
-            document.getElementById('popupContainer').style.display = 'none';
+		    // 이미지 업로드 후 팝업 닫기
+		    document.getElementById('popupContainer').style.display = 'none';
+		
+		    $.ajax({
+		        url: '/banner/modify2',
+		        method: 'POST',
+		        data: formData,
+		        contentType: false,
+		        processData: false,
+		        success: function(response) {
+		            console.log(response);
+		            var newWindow = window.open("/banner/preview?url=" + response, '_blank', 'width=400, height=500');
+		            newWindow.addEventListener("load", () => {
+		                // 부트스트랩 링크를 포함
+		                var bootstrapLink = newWindow.document.createElement('link');
+		                bootstrapLink.rel = 'stylesheet';
+		                bootstrapLink.href = 'https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css';
+		                newWindow.document.head.appendChild(bootstrapLink);
+		
+		                var button = newWindow.document.createElement('button');
+		                button.textContent = '업로드';
+                    	button.style.position = 'fixed';
+                    	button.style.top = 'calc(50% + 100px)';
+                    	button.style.left = '50%';
+                    	button.style.transform = 'translate(-50%, -50%)';
+		                button.classList.add('btn', 'btn-secondary', 'form-label');
+		                button.addEventListener('click', function() {
+		                    newWindow.close();
+		                });
+		                newWindow.document.body.appendChild(button);
+		
+		                newWindow.addEventListener("unload", () => {
+		                    window.location.href = "/";
+		                });
+		            });
+		        },
+		        error: function(error) {
+		            console.error('Error:', error);
+		        }
+		    });
+		}
 
-            $.ajax({
-                url: '/banner/modify2',
-                method: 'POST',
-                data: formData,
-                contentType: false,
-                processData: false,
-                success: function(response) {
-                    console.log(response);
-                    newWindow = window.open("/banner/preview?url=" + response, '_blank', 'width=400, height=500');
-                    newWindow.addEventListener("load", () => {
-                        newWindow.addEventListener("unload", () => {
-                            window.location.href = "/";
-                        });
-                    });
-                },
-                error: function(error) {
-                    console.error('Error:', error);
-                }
-            });
-        }
-
-        // 레이어 팝업 열기
+		// 레이어 팝업 열기
         function applyChanges() {
             // 이미지가 미리보기되어 있으면 팝업을 엽니다.
             const preview = document.getElementById('image-preview');
