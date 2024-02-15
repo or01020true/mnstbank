@@ -86,6 +86,7 @@
         }
 
         var newWindow = null;
+        
         // 변경사항 적용 함수
         function confirmApply() {
 		    // 이미지 업로드 후 팝업 닫기
@@ -109,10 +110,13 @@
 		
 		                var button = newWindow.document.createElement('button');
 		                button.textContent = '업로드';
-                    	button.style.position = 'fixed';
-                    	button.style.top = 'calc(50% + 100px)';
-                    	button.style.left = '50%';
-                    	button.style.transform = 'translate(-50%, -50%)';
+		                button.style.position = 'absolute';
+		                // 이미지 아래로 이동하도록 조정
+		                var image = newWindow.document.querySelector('img');
+		                var imageRect = image.getBoundingClientRect(); // 이미지의 위치 및 크기 정보를 가져옴
+		                button.style.top = (imageRect.bottom + 20) + 'px'; // 이미지 아래 20px 여백을 주고 버튼 배치
+		                button.style.left = '50%';
+		                button.style.transform = 'translateX(-50%)'; // 가로 중앙 정렬
 		                button.classList.add('btn', 'btn-secondary', 'form-label');
 		                button.addEventListener('click', function() {
 		                    newWindow.close();
