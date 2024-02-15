@@ -80,7 +80,7 @@ public class S3Controller {
         HttpSession session = request.getSession();
         if (session != null) {
             User user = (User) session.getAttribute("user");
-            if (!user.getMylevel().equals("0")) {
+            if (user.getMylevel().equals("0")) {
                 model.addAttribute("msg", "관리자만 접근 가능합니다.");
                 return "banking/alert";
             }
