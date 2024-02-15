@@ -22,7 +22,6 @@ public class UserDAO {
 	private PreparedStatement pstmt2;
 	private ResultSet rs;
 
-	//메인페이지 이름
 	public String getName(String myid) {
 		String myName = null;
 		String SQL = "SELECT myname FROM myuser WHERE myid = ?";
@@ -174,7 +173,7 @@ public class UserDAO {
 				user.setMylocation(rs.getString("mylocation"));
 				user.setMyphone(Encrypt.decryptAES(rs.getString("myphone")));
 				user.setMysid(Encrypt.decryptAES(rs.getString("mysid")));
-				user.setMysid(rs.getString("mylevel"));
+				user.setMylevel(rs.getString("mylevel"));
 			}
 
 			return user;

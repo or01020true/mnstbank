@@ -77,28 +77,24 @@ public class S3Controller {
     // 관리자
     @GetMapping("modify")
     public String modify(Model model, HttpServletRequest request) {
-       /*
         HttpSession session = request.getSession();
-       if (session != null) {
-           User user = (User) session.getAttribute("user");
-           if (user.getMylevel().equals("0")) {
-               model.addAttribute("msg", "관리자만 접근 가능합니다.");
-               return "banking/alert";
-           }
-
-           if (user != null) {
-               model.addAttribute("name", user.getMyname());
-           }
-       }
-       */
-       String jwt = jwtUtil.getToken(request.getCookies());
-       if (jwt == null || !jwtUtil.validateToken(jwt)) {
-           model.addAttribute("msg", "JWT이 존재하지 않습니다..");
-           return "banking/alert";
-       } else if(!jwtUtil.extractUserId(jwt).equals("admin")) {
-           model.addAttribute("msg", "관리자만 접근 가능합니다.");
-           return "banking/alert";
-       }
+        if (session != null) {
+            User user = (User) session.getAttribute("user");
+            if (!user.getMylevel().equals("0")) {
+                model.addAttribute("msg", "관리자만 접근 가능합니다.");
+                return "banking/alert";
+            }
+        }
+        /*
+        String jwt = jwtUtil.getToken(request.getCookies());
+        if (jwt == null || !jwtUtil.validateToken(jwt)) {
+            model.addAttribute("msg", "JWT이 존재하지 않습니다.");
+            return "banking/alert";
+        } else if(!jwtUtil.extractUserId(jwt).equals("admin")) {
+            model.addAttribute("msg", "관리자만 접근 가능합니다.");
+            return "banking/alert";
+        }
+        */
         return "member/modify";
     }
  	
