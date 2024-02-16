@@ -26,8 +26,10 @@ public class MainController {
         String jwt = jwtUtil.getToken(request.getCookies());
     	if (jwt != null && jwtUtil.validateToken(jwt)) {
             String userName = userDAO.getName(jwtUtil.extractUserId(jwt));
+            String userLevel = userDAO.getLevel(jwtUtil.extractUserId(jwt));
             if (userName != null) {
     		    model.addAttribute("name", userName);
+                model.addAttribute("level", userLevel);
             }
         }
         return "index";

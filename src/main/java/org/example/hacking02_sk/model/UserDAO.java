@@ -37,6 +37,22 @@ public class UserDAO {
 		}
 		return myName;
 	}
+
+	public String getLevel(String myid) {
+		String myLevel = null;
+		String SQL = "SELECT mylevel FROM myuser WHERE myid = ?";
+		try {
+			pstmt = MyDBConnection.getConnection().prepareStatement(SQL);
+			pstmt.setString(1, myid);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				myLevel = rs.getString(1);
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return myLevel;
+	}
 	
 	//로그인
 	public int login(String myid, String mypw) {
