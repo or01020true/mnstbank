@@ -15,11 +15,10 @@ public class JwtUtil {
 	public static final boolean JWT_MODE = false; // true = jwt auth, false = session auth 
 
     public String setToken(String userId, String userLevel, int time) {
-		Date now = new Date();
         return Jwts.builder()
                 .setHeaderParam("type", "jwt")
                 .claim("userId", userId)
-				.setIssuedAt(now)
+				.setIssuedAt(new Date())
 				.setExpiration(new Date(System.currentTimeMillis() + (1000 * time)))
 				.signWith(SignatureAlgorithm.HS256, SECRET_KEY)
                 .compact();
