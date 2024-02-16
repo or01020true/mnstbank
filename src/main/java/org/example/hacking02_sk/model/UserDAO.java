@@ -95,7 +95,7 @@ public class UserDAO {
 			pstmt.setString(5, user.getMylocation());
 			pstmt.setString(6, Encrypt.encryptAES("10" + user.getMyphone()));
 			pstmt.setString(7, Encrypt.encryptAES(user.getMysid()));
-			pstmt.setString(8, Encrypt.encryptAES(user.getMylevel()));
+			pstmt.setString(8, "0");
 			
 			pstmt.executeUpdate();
 			pstmt.close();
