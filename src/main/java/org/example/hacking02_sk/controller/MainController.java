@@ -25,11 +25,11 @@ public class MainController {
     String index(Model model, HttpServletRequest request){
         String jwt = jwtUtil.getToken(request.getCookies());
     	if (jwt != null && jwtUtil.validateToken(jwt)) {
-            String userName = userDAO.getName(jwtUtil.extractUserId(jwt));
-            String userLevel = userDAO.getLevel(jwtUtil.extractUserId(jwt));
-            if (userName != null) {
-    		    model.addAttribute("name", userName);
-                model.addAttribute("level", userLevel);
+            if (jwtUtil.extractUserId(jwt) != null) {
+    		    model.addAttribute("name", userDAO.getName(jwtUtil.extractUserId(jwt)));
+                model.addAttribute("level", userDAO.getLevel(jwtUtil.extractUserId(jwt)));
+                System.out.println("(hy debug) MainController Class -> userDAO.getName(JWT) : " + userDAO.getName(jwtUtil.extractUserId(jwt)));
+                System.out.println("(hy debug) MainController Class -> userDAO.getLevel(JWT) : " + userDAO.getLevel(jwtUtil.extractUserId(jwt)));
             }
         }
         return "index";

@@ -100,6 +100,7 @@ public class S3Controller {
             return "banking/alert";
         }
         model.addAttribute("name", userDAO.getName(jwtUtil.extractUserId(jwt)));
+        model.addAttribute("level", userDAO.getLevel(jwtUtil.extractUserId(jwt)));
         return "member/modify";
     }
  	
