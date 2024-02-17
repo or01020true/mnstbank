@@ -28,8 +28,6 @@ public class MainController {
             if (jwtUtil.extractUserId(jwt) != null) {
     		    model.addAttribute("name", userDAO.getName(jwtUtil.extractUserId(jwt)));
                 model.addAttribute("level", userDAO.getLevel(jwtUtil.extractUserId(jwt)));
-                System.out.println("(hy debug) MainController Class -> userDAO.getName(JWT) : " + userDAO.getName(jwtUtil.extractUserId(jwt)));
-                System.out.println("(hy debug) MainController Class -> userDAO.getLevel(JWT) : " + userDAO.getLevel(jwtUtil.extractUserId(jwt)));
             }
         }
         return "index";

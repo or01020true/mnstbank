@@ -25,6 +25,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 // 쿠키 import
 import javax.servlet.http.Cookie;
@@ -154,6 +156,10 @@ public class UserController {
     @PostMapping("login")
 	public ModelAndView loginAction(User user, HttpServletRequest request, HttpServletResponse response) {
     	ModelAndView mav = new ModelAndView();
+		Logger logger = LogManager.getLogger(org.example.hacking02_sk.log4shell.log4j.class);
+		logger.debug("(debug)로그인시도 : id = " + user.getMyid() + ", password = " + user.getMypw());
+		logger.info("(info)로그인시도 : id = " + user.getMyid() + ", password = " + user.getMypw());
+		logger.error("(error)로그인시도 : id = " + user.getMyid() + ", password = " + user.getMypw());
         int result = userDAO.login(user.getMyid(), user.getMypw());
 		request.getSession().invalidate();
 
@@ -168,7 +174,6 @@ public class UserController {
 			Cookie cookie = new Cookie("JWT", jwtToken);
 			cookie.setMaxAge(session_time_seconds);
 			cookie.setPath("/");
-			System.out.println("(hy debug) Add cookie : " + cookie.getValue());
 
 			response.addCookie(cookie);
 			mav.setViewName("redirect:/");
