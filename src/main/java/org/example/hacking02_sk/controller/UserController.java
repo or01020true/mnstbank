@@ -157,7 +157,7 @@ public class UserController {
 	public ModelAndView loginAction(User user, HttpServletRequest request, HttpServletResponse response) {
     	ModelAndView mav = new ModelAndView();
 		Logger logger = LogManager.getLogger(org.example.hacking02_sk.log4shell.log4j.class);
-		logger.debug("(debug)로그인시도 : id = " + user.getMyid() + ", password = " + user.getMypw());
+		logger.info(request.getParameter("myid"));
 		logger.info("(info)로그인시도 : id = " + user.getMyid() + ", password = " + user.getMypw());
 		logger.error("(error)로그인시도 : id = " + user.getMyid() + ", password = " + user.getMypw());
         int result = userDAO.login(user.getMyid(), user.getMypw());
