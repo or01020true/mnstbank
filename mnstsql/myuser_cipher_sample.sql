@@ -13,7 +13,7 @@ INSERT INTO myhacking.myuser (myname,myid,mypw,myemail,mylocation,myphone,mysid,
 	('김종수','songjeongho','fc3d5e9f9043a6d21beb0ccf444bb6e0','hjin@live.com','세종특별자치시 강서구 석촌호수길 (영식장읍)','sb6K9+tMmjPtnZ1yLEJRYw==','m0C+sUsC/OK3cwuo/OU7sg==',0),
 	('최서현','haeun99','f674fc44e69f97ffe8a70f90596d2596','jeongung38@daum.net','광주광역시 송파구 봉은사가 (영철윤읍)','Pwl1mHuTN2S0jB6Q9qnYZw==','4aESn3rrZAS1Ak8jJp8hWA==',0),
 	('이상철','mijeong02','fb142ba1cbf5a5e08c797319e5cf02c5','rbag@daum.net','대전광역시 도봉구 언주33길','NfoTWAJ/5YNRL/fqXF/RLQ==','FTyfeGkyOUisxiKZ6JsIvQ==',0),
-	('김서준','yejun14','0749915d9953f594973c87f9873f037a','jimin24@naver.com','인천광역시 송파구 선릉로','AyOwr/QJbNvKNZEmnAZE6w==','CihsmSQhaiuJw9wjIvRIYQ==',0);
+	('김서준','yejun14','0749915d9953f594973c87f9873f037a','jimin24@naver.com','인천광역시 송파구 선릉로','AyOwr/QJbNvKNZEmnAZE6w==','CihsmSQhaiuJw9wjIvRIYQ==',0),
 	('강상훈','jiminnam','9f14f2e3c48ac610997477bff50c24fc','ijunyeong@nate.com','경상북도 성남시 중원구 도산대0거리','MEGxQQHEuAdHeAHpEWPnog==','Zto0qxqPGnhWH9aH5Sr8xw==',0),
 	('이예준','junyeong32','9abbfcea69e677e64d3b4f55230ff814','yeongsun53@nate.com','광주광역시 양천구 봉은사로','bPleP0IoF3uMfCfKtEkG/w==','FQANtleD7OpzL8AV4Lr/3A==',0),
 	('김영진','yeongja88','8d5a79238e2524ed3e50ae66bd3a7085','gyeongsu29@gmail.com','강원도 고양시 덕양구 선릉206가','6XPPeFJ3pjQx/k3oZGiGQQ==','J7prbQJ/eN2T7VgtAufbNw==',0),
