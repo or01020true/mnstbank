@@ -10,22 +10,45 @@
 <body>
     <th:block th:replace="header :: headerFragment"></th:block>
     <div id="container">
-        <h1>배너 변경</h1>
+    	<h1>신분증정보확인 및 전송</h1>
 
         <!-- 이미지 드래그 앤 드롭 박스 -->
         <!-- 이미지 미리보기 -->
         <div id="image-preview">
             <label for="fileElem" id="drop-area" ondragover="handleDragOver(event)" ondrop="handleFileDrop(event)"
                 ondragenter="handleDragEnter(event)" ondragleave="handleDragLeave(event)">
-                이미지를 여기로 클릭하거나 드래그 앤 드롭 또는 파일을 선택하세요.
+                신분증 이미지를 업로드 또는 드래그 앤 드롭을 해주세요.
                 <input type="file" id="fileElem" accept="image/*" onchange="handleFiles(this.files)">
             </label>
+        </div>
+        <br>
+        <div id="input_container">
+        	<table>
+        		<tr>
+        			<td>이름</td>
+        		</tr>
+       			<tr>
+	        		<td>
+	        			<input class="form-control" type="text" maxlength="30" style="width:98%; display:inline-block;">
+	        			<br><br>
+	        		</td>
+        		</tr>
+        		<tr>
+        			<td>주민등록번호</td>
+        		</tr>
+        		<tr>
+	        		<td>
+	        			<input class="form-control" type="text" maxlength="6" style="width:47%; display:inline-block; margin: 0 auto;">
+	        	 		- <input class="form-control" type="password" maxlength="7" style="width:47%; display:inline-block; margin: 0 auto;">
+	        		</td>
+	        	</tr>
+        	</table>
         </div>
 
         <!-- 버튼 그룹 -->
         <div class="button-container">
             <!-- 적용 버튼 -->
-            <button id="applyButton" class="btn btn-secondary form-label" onclick="applyChanges()">업로드</button>
+            <button id="applyButton" class="btn btn-secondary form-label" onclick="applyChanges()">계좌개설</button>
         </div>
     </div>
 
@@ -35,7 +58,7 @@
                 <tbody>
                     <tr>
                         <td style="text-align: center;">
-                            <h3>이미지를 변경하시겠습니까?</h3>
+                            <h3>신분증 이미지를 업로드 하시겠습니까?</h3>
                         </td>
                     </tr>
                     <tr>
@@ -152,7 +175,7 @@
             // 팝업 닫은 후 URL 원래대로 변경
             history.pushState(null, '', originalUrl);
             document.getElementById('popupContainer').style.display = 'none';
-            window.location.href = "/member/modify";
+            window.location.href = "/banner/modify";
         }
     </script>
     
