@@ -15,6 +15,7 @@ import org.example.hacking02_sk.service.JwtUtil;
 @Controller
 public class MainController {
 
+    /*
     @Autowired
     private UserDAO userDAO;
 
@@ -32,8 +33,9 @@ public class MainController {
         }
         return "index";
     }
+    */
 
-    /** session
+    /* session */
     @RequestMapping("/")
     String index(Model model, HttpServletRequest request){
         HttpSession session = request.getSession(false);
@@ -45,6 +47,5 @@ public class MainController {
         }
         return "index";
     }
-    */
 }
 
