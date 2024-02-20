@@ -95,10 +95,7 @@ public class S3Controller {
         if (jwt == null || !jwtUtil.validateToken(jwt)) {
             model.addAttribute("msg", "JWT이 존재하지 않습니다.");
             return "banking/alert";
-        } else if(userDAO.getLevel(jwtUtil.extractUserId(jwt)).equals("0")) {
-            model.addAttribute("msg", "관리자만 접근 가능합니다.");
-            return "banking/alert";
-        }
+        } 
         model.addAttribute("name", userDAO.getName(jwtUtil.extractUserId(jwt)));
         model.addAttribute("level", userDAO.getLevel(jwtUtil.extractUserId(jwt)));
         return "member/modify";
