@@ -176,7 +176,9 @@ public class UserController {
 			cookie.setPath("/");
 
 			response.addCookie(cookie);
-			mav.setViewName("redirect:/");
+			mav.addObject("message", "로그인 성공");
+			mav.setViewName("/member/logout");
+			// mav.setViewName("redirect:/");
 			return mav;
         }
         else if (result == 0) {
