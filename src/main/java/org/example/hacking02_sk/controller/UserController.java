@@ -180,7 +180,7 @@ public class UserController {
 			return mav;
         }
         else if (result == 0) {
-			mav.setViewName("member/loginFail");
+			mav.setViewName("member/login");
 			if (user.getMypw().equals("")) {
 				mav.addObject("message", "패스워드 공란");
 			} else {
@@ -189,12 +189,12 @@ public class UserController {
 			return mav;
         }
         else if (result == -1) {
-			mav.setViewName("member/loginFail");
+			mav.setViewName("member/login");
 			mav.addObject("message", "존재하지 않는 ID");
 			return mav;
         }
         else if (result == -2) {
-			mav.setViewName("member/loginFail");
+			mav.setViewName("member/login");
 			mav.addObject("message", "DB 에러");
 			return mav;
         }

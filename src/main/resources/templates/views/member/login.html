@@ -63,6 +63,9 @@
 					<input type="submit" class="btn btn-secondary form-control" value="회원가입" />
 				</form>
 			</div>
+			<div class="mb-3" th:if="${message != null}">
+				<p style="text-align: center; font-size: 1.5em; color: red;">아이디 또는 비밀번호를 잘못 입력했습니다.</p>
+			</div>
 		</div>
 	</div>
 	<th:block th:replace="footer :: footerFragment"></th:block>
