@@ -63,7 +63,7 @@
 		<div class="sub-containers">
 			<p style="text-align: center; font-size: 1.2rem">당행/다른기관이체</p>
 			<form action="/banking/sendBank" method="post" name="sendform">
-				<input type="hidden" name="csrfToken" th:value="${csrfToken}">
+				<!-- <input type="hidden" name="csrfToken" th:value="${csrfToken}"> --> <!-- csrf secure -->
 				<table class="table table-bordered">
 					<thead>
 					<tr>

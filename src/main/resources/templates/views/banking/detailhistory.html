@@ -47,7 +47,7 @@
 		        </tr>
 		        <tr>
 		            <form action="/banking/detailhistory" method="post">
-						<input type="hidden" name="csrfToken" th:value="${csrfToken}">
+						<!-- <input type="hidden" name="csrfToken" th:value="${csrfToken}"> --> <!-- csrf secure -->
 						<input type="hidden" name="checkSearch" value="1">
 		                <td colspan="4">
 		                    <input type="text" class="form-control" name="keyword" style="margin: 0 auto;"
@@ -59,7 +59,7 @@
 		            </form>
 		        </tr>
 		        <form method="post">
-					<input type="hidden" name="csrfToken" th:value="${csrfToken}"/>
+					<!-- <input type="hidden" name="csrfToken" th:value="${csrfToken}"/> --> <!-- csrf secure -->
 		            <tr>
 		                <td style="background-color:#fafafa">조회계좌번호</td>
 		                <td colspan="4">
