@@ -88,6 +88,9 @@ public class UserDAO {
 		int num = 0;
 		
 		try {
+			String encrypt_myphone = Encrypt.encryptAES("10" + user.getMyphone());
+			String encrypt_mysid = Encrypt.encryptAES(user.getMysid());
+
 			// myuser table
 			pstmt = MyDBConnection.getConnection().prepareStatement(query1);
 			pstmt.setString(1, user.getMyname());
@@ -95,8 +98,8 @@ public class UserDAO {
 			pstmt.setString(3, Encrypt.hashMD5(user.getMypw()));
 			pstmt.setString(4, user.getMyemail());
 			pstmt.setString(5, user.getMylocation());
-			pstmt.setString(6, Encrypt.encryptAES("10" + user.getMyphone()));
-			pstmt.setString(7, Encrypt.encryptAES(user.getMysid()));
+			pstmt.setString(6, encrypt_myphone);
+			pstmt.setString(7, encrypt_mysid);
 			pstmt.setString(8, "0");
 			
 			pstmt.executeUpdate();
@@ -104,7 +107,7 @@ public class UserDAO {
 			
 			// myacc table
 			pstmt2 = MyDBConnection.getConnection().prepareStatement(query2);
-			pstmt2.setString(1, Encrypt.encryptAES("10" + user.getMyphone()));
+			pstmt2.setString(1, encrypt_myphone);
 			pstmt2.setString(2, user.getMyid());
 			pstmt2.setInt(3, 1000000);	// 초기 잔액
 			pstmt2.setString(4, "MNST");
@@ -158,9 +161,10 @@ public class UserDAO {
 		
 //    	System.out.println("넘어오는 myphone 값 : " + "10" + myphone);
 
-    	try {		
+    	try {
+			String encrypt_myphone = Encrypt.encryptAES("10" + myphone);
 			pstmt = MyDBConnection.getConnection().prepareStatement(SQL);
-			pstmt.setString(1, Encrypt.encryptAES("10" + myphone));
+			pstmt.setString(1, encrypt_myphone);
 //			System.out.println(pstmt);
 			rs = pstmt.executeQuery(); // 결과 담는 객체
 
@@ -182,6 +186,9 @@ public class UserDAO {
 		User user = null;
 		String SQL = "SELECT myname, myid, mypw, myemail, mylocation, myphone, mysid, mylevel FROM myuser WHERE myid = ?";
 		try {
+			String encrypt_myphone = null;
+			String encrypt_mysid = null;
+
 			pstmt = MyDBConnection.getConnection().prepareStatement(SQL);
 			pstmt.setString(1, myid);
 			rs = pstmt.executeQuery();
@@ -192,11 +199,14 @@ public class UserDAO {
 				user.setMypw(rs.getString("mypw"));
 				user.setMyemail(rs.getString("myemail"));
 				user.setMylocation(rs.getString("mylocation"));
-				user.setMyphone(Encrypt.decryptAES(rs.getString("myphone")));
-				user.setMysid(Encrypt.decryptAES(rs.getString("mysid")));
+				encrypt_myphone = rs.getString("myphone");
+				encrypt_mysid = rs.getString("mysid");
 				user.setMylevel(rs.getString("mylevel"));
 			}
-
+			if(user != null) {
+				user.setMyphone(Encrypt.decryptAES(encrypt_myphone));
+				user.setMysid(Encrypt.decryptAES(encrypt_mysid));
+			}
 			return user;
 		} catch(Exception e) {
 			e.printStackTrace();
