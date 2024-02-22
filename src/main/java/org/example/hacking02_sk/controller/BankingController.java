@@ -154,6 +154,7 @@ public class BankingController {
     ModelAndView sendBank(SendBanking sendBanking, HttpServletRequest request, HttpSession session) {
         ModelAndView mav = new ModelAndView("banking/alert");
         String msg = "";
+        /* csrf secure
         User user = (User)session.getAttribute("user");
         Banking checkBanking = bankingMapper.myid(user.getMyid()).get(0);
         System.out.println(checkBanking.getMyacc());
@@ -163,19 +164,24 @@ public class BankingController {
             mav.addObject("msg", msg);
             return mav;
         }
+        */
 
 //        System.out.println(sendBanking.getMyaccbalance());
 
-        if (!sendBanking.getCsrfToken().equals(csrfToken)) {
-            msg = "조작하지 마세요.";
-            mav.addObject("msg", msg);
-            return mav;
-        }else if (sendBanking.getMyaccbalance() < 0 || String.valueOf(sendBanking.getMyaccbalance()).contains("-")) {
+
+        if (sendBanking.getMyaccbalance() < 0 || String.valueOf(sendBanking.getMyaccbalance()).contains("-")) {
 //            System.out.println(sendBanking.getMyaccbalance());
             msg = "조작하지 마세요.";
             mav.addObject("msg", msg);
             return mav;
         }
+        /* csrf secure
+        else if (!sendBanking.getCsrfToken().equals(csrfToken)) {
+            msg = "조작하지 마세요.";
+            mav.addObject("msg", msg);
+            return mav;
+        }
+        */
 
         char[] ch1 = sendBanking.getMyaccmemo().toCharArray();
         char[] ch2 = sendBanking.getMyaccioname().toCharArray();
@@ -282,16 +288,22 @@ public class BankingController {
             if (detailHistory.getKeyword() == null || detailHistory.getKeyword().strip().equals("")) {
                 model.addAttribute("msg", "조작하지 마세요.");
                 return "banking/alert";
-            }else if (!detailHistory.getCsrfToken().equals(csrfToken)) {
+            }
+            /* csrf secure
+            else if (!detailHistory.getCsrfToken().equals(csrfToken)) {
                 model.addAttribute("msg", "조작하지 마세요.");
                 return "banking/alert";
             }
-        }else {
+            */
+        }
+        /* csrf secure
+        else {
             if (!detailHistory.getCsrfToken().equals(csrfToken)) {
                 model.addAttribute("msg", "조작하지 마세요.");
                 return "banking/alert";
             }
         }
+        */
 
         if (detailHistory.getKeyword() != null) {
             char[] ch3 = detailHistory.getKeyword().toCharArray();
