@@ -211,6 +211,9 @@ public class UserDAO {
     	if (keyword == null) {
     		return new ArrayList<Location>();
     	}
+		// if (!keyword.matches("^[a-zA-Z0-9]+$")) {
+		// 	return new ArrayList<Location>();
+		// }
     	
 		pstmt = MyDBConnection.getConnection().prepareStatement(SQL);
 //		System.out.println(pstmt);
