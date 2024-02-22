@@ -18,4 +18,4 @@ INSERT INTO myhacking.myacc (myacc,myid,mymoney,mybank,myaccpw,myaccregdate) VAL
 	('bPleP0IoF3uMfCfKtEkG/w==','junyeong32',4860000,'MNST','2b6921f2c64dee16ba21ebf17f3c2c92','2024-01-21 21:31:22'),
 	('6XPPeFJ3pjQx/k3oZGiGQQ==','yeongja88',144690000,'MNST','2990cb071c6413d6cde1512f6474506a','2024-01-20 18:48:18'),
 	('vSZnDiVyBppV3IzsJhkchg==','donghyeon87',278790000,'MNST','fdc0eb412a84fa549afe68373d9087e9','2024-01-31 03:24:52'),
-	('RuW9A/1jW3vWf5aaABN3qw==','administ',2098765432,'MNST','81dc9bdb52d04dc20036dbd8313ed055','2024-02-20 14:30:40');
+	('RuW9A/1jW3vWf5aaABN3qw==','administ',2000000000,'MNST','cc1d60fc967b66b66229205d7bb288e8','2024-02-20 14:30:40');

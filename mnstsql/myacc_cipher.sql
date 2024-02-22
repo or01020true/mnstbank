@@ -11000,7 +11000,7 @@ INSERT INTO myhacking.myacc (myacc,myid,mymoney,mybank,myaccpw,myaccregdate) VAL
 	 ('RP9UJ3K3GnS4oEObnzagOQ==','jaehyeonjeon',382840000,'SC제일은행','1f5e7f2748adabf08629a6312ac3bfdd','2024-01-25 04:37:24');
 INSERT INTO myhacking.myacc (myacc,myid,mymoney,mybank,myaccpw,myaccregdate) VALUES
 	 ('Yd5HQVDiTY/R0oCDId+hwQ==','user1',99964000,'MNST','b59c67bf196a4758191e42f76670ceba','2024-01-31 10:38:34'),
-	 ('RuW9A/1jW3vWf5aaABN3qw==','admin',100000,'MNST','81dc9bdb52d04dc20036dbd8313ed055','2024-01-31 10:38:34'),
+	 ('RuW9A/1jW3vWf5aaABN3qw==','administ',2000000000,'MNST','cc1d60fc967b66b66229205d7bb288e8','2024-01-31 10:38:34'),
 	 ('pAQ29e/J3enWjGf1GtXrvg==','user2',200075000,'MNST','934b535800b1cba8f96a5d72f72f1611','2024-01-31 10:38:34'),
 	 ('ZqXteAtg0nHQ46aVQYHVJw==','user3',299985000,'MNST','2be9bd7a3434f7038ca27d1918de58bd','2024-01-31 10:38:34'),
 	 ('ExqA6MoAMnIBJwvzHHsVUw==','user4',400015000,'MNST','dbc4d84bfcfe2284ba11beffb853a8c4','2024-01-31 10:38:34'),
