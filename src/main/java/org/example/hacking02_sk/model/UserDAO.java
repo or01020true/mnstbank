@@ -57,6 +57,9 @@ public class UserDAO {
 	//로그인
 	public int login(String myid, String mypw) {
 		String SQL = "SELECT mypw FROM myuser WHERE myid = ?";
+		if (!myid.matches("^[a-zA-Z0-9]+$")) {
+			return -3; // ID에 특수문자 포함
+		}
 		try {
 			pstmt = MyDBConnection.getConnection().prepareStatement(SQL);
 			pstmt.setString(1, myid);
@@ -82,7 +85,6 @@ public class UserDAO {
         "VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
         String query2 = "INSERT INTO myacc (myacc, myid, mymoney, mybank, myaccpw) " +
         "VALUES (?, ?, ?, ?, ?);";
-		
 		int num = 0;
 		
 		try {
@@ -126,6 +128,9 @@ public class UserDAO {
     	if (myid.equals("")) {
     		return 2;
     	}
+		if (!myid.matches("^[a-zA-Z0-9]+$")) {
+			return -3; // ID에 특수문자 포함
+		}
     	
     	try {		
 			pstmt = MyDBConnection.getConnection().prepareStatement(SQL);

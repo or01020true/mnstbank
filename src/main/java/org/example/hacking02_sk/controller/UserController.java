@@ -118,6 +118,9 @@ public class UserController {
 		else if(flag == 2) {
 			result = "NO";
 		}
+		else if(flag == -3) {
+			result = "IDNO";
+		}
 
         check.put("result", result);
         System.out.println("result값 : " + result);
@@ -198,6 +201,11 @@ public class UserController {
         else if (result == -2) {
 			mav.setViewName("member/login");
 			mav.addObject("message", "DB 에러");
+			return mav;
+        }
+		else if (result == -3) {
+			mav.setViewName("member/login");
+			mav.addObject("message", "ID에 특수문자 금지");
 			return mav;
         }
         return null; // maybe not reachable

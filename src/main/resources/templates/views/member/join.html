@@ -188,10 +188,15 @@
                  		submitCheck = false;
              		}
              		else if(data.result == "NO"){ // null
-						 result = "아이디를 입력해주세요."
+						result = "아이디를 입력해주세요."
                     	$("#label_myid").html(result).css("color", "red");
                  		submitCheck = false;
-					 }
+					}
+					else if(data.result == "IDNO"){ // null
+						result = "아이디에는 특수문자를 사용할 수 없습니다."
+                    	$("#label_myid").html(result).css("color", "red");
+                 		submitCheck = false;
+					}
              		else{ 
                  	 	result="이미 사용중인 아이디입니다.";
                      	$("#label_myid").html(result).css("color","red");
