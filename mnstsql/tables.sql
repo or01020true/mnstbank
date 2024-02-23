@@ -55,6 +55,14 @@ create table if not exists myaddr(
     myaddr varchar(200)
 );
 
+create table if not exists mykeys(
+	mykey varchar(64),
+    myvalue varchar(200)
+);
+
+# mykeys 테이블에 데이터 추가
+insert into mykeys(mykey, myvalue) values ('AES', '_group2mnstbank_');
+
 # myboard 테이블에 데이터 추가
 insert into myboard(mydate, mypriority, myreadcount, mycontent, myip,  myid, mysubject, myfilepath, mytext) values
 (now(), 0, 0, '게시글유형', '192.168.0.1', '아이디', '게시판제목', '/절대경로/파일1;/절대경로/파일2;', '게시판내용');
