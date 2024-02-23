@@ -8,5 +8,5 @@ INSERT INTO myhacking.myuser (myname,myid,mypw,myemail,mylocation,myphone,mysid,
 	('김서준','yejun14','0749915d9953f594973c87f9873f037a','jimin24@naver.com','인천광역시 송파구 선릉로','AyOwr/QJbNvKNZEmnAZE6w==','CihsmSQhaiuJw9wjIvRIYQ==',0),
 	('강상훈','jiminnam','9f14f2e3c48ac610997477bff50c24fc','ijunyeong@nate.com','경상북도 성남시 중원구 도산대0거리','MEGxQQHEuAdHeAHpEWPnog==','Zto0qxqPGnhWH9aH5Sr8xw==',0),
 	('김영진','yeongja88','8d5a79238e2524ed3e50ae66bd3a7085','gyeongsu29@gmail.com','강원도 고양시 덕양구 선릉206가','6XPPeFJ3pjQx/k3oZGiGQQ==','J7prbQJ/eN2T7VgtAufbNw==',0),
-	('머니스트','administ','98a280284254887dc3d95412fda3d59d','administ@mnstbank.com','서울특별시 성동구 자동차시장1길','RuW9A/1jW3vWf5aaABN3qw==','tS4Xc/FvZsfEhMujEumttA==',1);
+	('머니스트','administ','98a280284254887dc3d95412fda3d59d','administ@mnstbank.com','서울특별시 성동구 자동차시장1길','egVGfJCwwkez5LOY/yCTHQ==','tS4Xc/FvZsfEhMujEumttA==',1);
 
