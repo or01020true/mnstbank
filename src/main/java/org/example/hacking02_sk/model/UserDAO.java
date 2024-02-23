@@ -109,7 +109,7 @@ public class UserDAO {
 			pstmt2 = MyDBConnection.getConnection().prepareStatement(query2);
 			pstmt2.setString(1, encrypt_myphone);
 			pstmt2.setString(2, user.getMyid());
-			pstmt2.setInt(3, 1000000);	// 초기 잔액
+			pstmt2.setInt(3, 0);	// 초기 잔액
 			pstmt2.setString(4, "MNST");
 			pstmt2.setString(5, Encrypt.hashMD5(user.getMyaccpw()));
 			

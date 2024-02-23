@@ -1,22 +1,12 @@
 INSERT INTO myhacking.myuser (myname,myid,mypw,myemail,mylocation,myphone,mysid,mylevel) VALUES
-	('박시우','migyeonggweon','6b35b86a07bc90415ab3c04cf4310133','gimyeongsu@dreamwiz.com','울산광역시 종로구 백제고분97로','RPZoofKxUOrW/29MLsOkHw==','aGPWw47WK5V142mrgBi0tg==',0),
-	('전승현','hyeonsugbag','88cfcd79e9eca451dff4b8d84f70e9da','yeongmii@naver.com','인천광역시 강동구 가락길 (주원이권동)','+1W31fBAcx2mi8kTRTqACg==','+XOdD81W8FtX08RMqpSz4A==',0),
-	('윤민석','yeongjinseo','7218143996b897947e3dee1918c447aa','sumini@hotmail.com','충청북도 양양군 잠실2거리 (정순한김면)','UgivvEY4PezJmAFRJ7vNvw==','7U5pF0OF08cSGU03WpaPnQ==',0),
 	('남상호','jongsu91','60ee6474cd5ff366d0b98f27cdee124d','jongsubag@hotmail.com','광주광역시 동대문구 강남대길','9geKnEGW39dcJ7Ohg9FQgQ==','u2vw8GzNKFqY6379fTz0Vg==',0),
-	('김숙자','siu16','2645ffba35f260408cce2d24cef5670c','minmyeongsug@live.com','대구광역시 종로구 개포가','xuTrDloyeeJb5X8M6QwKjw==','OQgAd/IjIhtV+DdKowdxWQ==',0),
 	('오상훈','yunseo19','ac6f6345ecfe0b345d68bba782a135eb','seoyeong58@live.com','세종특별자치시 성동구 테헤란355거리','jrHz5z5FNtJ9eAqrXcc5yQ==','tdamqlMo7b/b8Krgf64e/w==',0),
 	('류우진','nosumin','7a1ba22a58e3e808aba2c049c914a665','minjungwag@naver.com','강원도 삼척시 학동가','iadPt2bs61UVzc8JWaQ3RQ==','FDjOPXbRyaUn+BRzWpCHag==',0),
-	('윤은서','yeongmiyang','54a92f9a40edeb4e7c071fff926be1df','seonghogim@naver.com','울산광역시 광진구 테헤란가 (민서이김읍)','yeNzklh0xlx3yo1Whk3Piw==','KXWUUfcBfVlplanFO0jwfA==',0),
 	('이승현','mgweon','7eec3ebe34d8d1619ff857c48bc37c05','lsong@hanmail.net','서울특별시 북구 서초대0거리 (유진허김마을)','GJn7IfRHKA/xTttSYg3vyA==','y8EQZSqE9UOytCvlQ6RypQ==',0),
-	('서성수','eunjeong54','7c94e0f01aa904d1a8a293e05e9a593f','cjo@naver.com','전라남도 양주시 삼성가 (지영김마을)','1SK4TZ4tZjx8a2OYvMFvKA==','0G11kxGdOkWmoS+WU4gIGg==',0),
 	('장옥순','gimyeeun','5dac3a9dddce5ed172c944ce78cd78cb','sunjago@live.com','경상북도 안양시 동안구 학동가','kOzZUpn0shVMzjyB6QxXAQ==','/7bqAE+0H2ZKoG27zM1sDQ==',0),
-	('김종수','songjeongho','fc3d5e9f9043a6d21beb0ccf444bb6e0','hjin@live.com','세종특별자치시 강서구 석촌호수길 (영식장읍)','sb6K9+tMmjPtnZ1yLEJRYw==','m0C+sUsC/OK3cwuo/OU7sg==',0),
 	('최서현','haeun99','f674fc44e69f97ffe8a70f90596d2596','jeongung38@daum.net','광주광역시 송파구 봉은사가 (영철윤읍)','Pwl1mHuTN2S0jB6Q9qnYZw==','4aESn3rrZAS1Ak8jJp8hWA==',0),
-	('이상철','mijeong02','fb142ba1cbf5a5e08c797319e5cf02c5','rbag@daum.net','대전광역시 도봉구 언주33길','NfoTWAJ/5YNRL/fqXF/RLQ==','FTyfeGkyOUisxiKZ6JsIvQ==',0),
 	('김서준','yejun14','0749915d9953f594973c87f9873f037a','jimin24@naver.com','인천광역시 송파구 선릉로','AyOwr/QJbNvKNZEmnAZE6w==','CihsmSQhaiuJw9wjIvRIYQ==',0),
 	('강상훈','jiminnam','9f14f2e3c48ac610997477bff50c24fc','ijunyeong@nate.com','경상북도 성남시 중원구 도산대0거리','MEGxQQHEuAdHeAHpEWPnog==','Zto0qxqPGnhWH9aH5Sr8xw==',0),
-	('이예준','junyeong32','9abbfcea69e677e64d3b4f55230ff814','yeongsun53@nate.com','광주광역시 양천구 봉은사로','bPleP0IoF3uMfCfKtEkG/w==','FQANtleD7OpzL8AV4Lr/3A==',0),
 	('김영진','yeongja88','8d5a79238e2524ed3e50ae66bd3a7085','gyeongsu29@gmail.com','강원도 고양시 덕양구 선릉206가','6XPPeFJ3pjQx/k3oZGiGQQ==','J7prbQJ/eN2T7VgtAufbNw==',0),
-	('박성민','donghyeon87','29a46207c0c062fa4c121d5f82e12475','tgang@daum.net','강원도 옥천군 백제고분66로 (채원이윤동)','vSZnDiVyBppV3IzsJhkchg==','gFht8Ilbk+ZBG+dmisg8IQ==',0),
 	('머니스트','administ','98a280284254887dc3d95412fda3d59d','administ@mnstbank.com','서울특별시 성동구 자동차시장1길','RuW9A/1jW3vWf5aaABN3qw==','tS4Xc/FvZsfEhMujEumttA==',1);
 
