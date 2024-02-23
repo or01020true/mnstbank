@@ -221,7 +221,7 @@ public class BankingController {
             return mav;
         }
 
-        // JWT validation - start
+        /* JWT validation
         String jwt = null;
         Cookie[] cookies = request.getCookies();
         if (cookies != null) {
@@ -239,7 +239,7 @@ public class BankingController {
         } else {
             System.out.println("(hy debug) JWT 인증성공 : " + jwt);
         }
-        // JWT validation - end
+        */
 
         if (sendBanking.getMysendbank().equals("MNST")) {
             Banking banking2 = bankingMapper.myacc(sendBanking.getMysendacc());
