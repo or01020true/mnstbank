@@ -11000,7 +11000,7 @@ INSERT INTO myhacking.myacc (myacc,myid,mymoney,mybank,myaccpw,myaccregdate) VAL
 	 ('1099994582','jaehyeonjeon',382840000,'SC제일은행','4342','2024-01-25 04:37:24');
 INSERT INTO myhacking.myacc (myacc,myid,mymoney,mybank,myaccpw,myaccregdate) VALUES
 	 ('1011111111','user1',99964000,'MNST','1111','2024-01-31 10:38:34'),
-	 ('1012345678','administ',2000000000,'MNST','0307','2024-01-31 10:38:34'),
+	 ('1020211017','administ',2000000000,'MNST','0307','2024-01-31 10:38:34'),
 	 ('1022222222','user2',200075000,'MNST','2222','2024-01-31 10:38:34'),
 	 ('1033333333','user3',299985000,'MNST','3333','2024-01-31 10:38:34'),
 	 ('1044444444','user4',400015000,'MNST','4444','2024-01-31 10:38:34'),
