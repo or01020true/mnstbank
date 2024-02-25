@@ -217,7 +217,7 @@ public class UserDAO {
     //주소 찾기
     public List<Location> findLocation(String keyword) throws SQLException {
     	String SQL = "SELECT * FROM myaddr WHERE myaddr LIKE '%" + keyword + "%'";
-
+		System.out.println("findLocation SQL = " + SQL);
     	if (keyword == null) {
     		return new ArrayList<Location>();
     	}
