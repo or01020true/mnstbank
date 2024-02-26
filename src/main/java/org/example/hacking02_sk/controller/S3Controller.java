@@ -81,16 +81,16 @@ public class S3Controller {
     // 관리자
     @GetMapping("modify")
     public String modify(Model model, HttpServletRequest request) {
-        /*
         HttpSession session = request.getSession();
         if (session != null) {
             User user = (User) session.getAttribute("user");
-            if (user.getMylevel().equals("0")) {
-                model.addAttribute("msg", "관리자만 접근 가능합니다.");
-                return "banking/alert";
-            }
+            model.addAttribute("name", user.getMyname());
+            model.addAttribute("level", user.getMylevel());
+            return "member/modify";
         }
-        */
+        model.addAttribute("msg", "세션이 만료되었습니다.");
+        return "banking/alert";
+        /* jwt
         String jwt = jwtUtil.getToken(request.getCookies());
         if (jwt == null || !jwtUtil.validateToken(jwt)) {
             model.addAttribute("msg", "JWT이 존재하지 않습니다.");
@@ -99,6 +99,7 @@ public class S3Controller {
         model.addAttribute("name", userDAO.getName(jwtUtil.extractUserId(jwt)));
         model.addAttribute("level", userDAO.getLevel(jwtUtil.extractUserId(jwt)));
         return "member/modify";
+        */
     }
  	
     @PostMapping("modify2")

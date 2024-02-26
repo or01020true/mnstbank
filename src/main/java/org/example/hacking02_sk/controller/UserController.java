@@ -173,12 +173,13 @@ public class UserController {
 			session.setAttribute("user", user);
 			session.setMaxInactiveInterval(session_time_seconds);
 
+			/* JWT
 			String jwtToken = jwtUtil.setToken(user.getMyid(), user.getMylevel(), session_time_seconds);
 			Cookie cookie = new Cookie("JWT", jwtToken);
 			cookie.setMaxAge(session_time_seconds);
 			cookie.setPath("/");
-
 			response.addCookie(cookie);
+			*/
 			mav.setViewName("redirect:/");
 			return mav;
         }
