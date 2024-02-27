@@ -100,9 +100,9 @@ public class BankingController {
                 List<SendBanking> sendBankings = new ArrayList<>();
                 for(Banking bank : bankList) {
                     SendBanking sendBanking = bankinghistMapper.sendbanking(bank.getMyacc());
-                    sendBanking.setMyacc(sendBanking.getMyaccDec());
-                    sendBanking.setMysendacc(sendBanking.getMysendaccDec());
                     if (sendBanking != null) {
+                        sendBanking.setMyacc(sendBanking.getMyaccDec());
+                        sendBanking.setMysendacc(sendBanking.getMysendaccDec());
                         sendBankings.add(sendBanking);
                     }
                 }
@@ -154,7 +154,6 @@ public class BankingController {
     ModelAndView sendBank(SendBanking sendBanking, HttpServletRequest request, HttpSession session) {
         ModelAndView mav = new ModelAndView("banking/alert");
         String msg = "";
-        /* csrf secure
         User user = (User)session.getAttribute("user");
         Banking checkBanking = bankingMapper.myid(user.getMyid()).get(0);
         System.out.println(checkBanking.getMyacc());
@@ -164,7 +163,6 @@ public class BankingController {
             mav.addObject("msg", msg);
             return mav;
         }
-        */
 
 //        System.out.println(sendBanking.getMyaccbalance());
 
@@ -175,13 +173,11 @@ public class BankingController {
             mav.addObject("msg", msg);
             return mav;
         }
-        /* csrf secure
         else if (!sendBanking.getCsrfToken().equals(csrfToken)) {
             msg = "조작하지 마세요.";
             mav.addObject("msg", msg);
             return mav;
         }
-        */
 
         char[] ch1 = sendBanking.getMyaccmemo().toCharArray();
         char[] ch2 = sendBanking.getMyaccioname().toCharArray();
@@ -259,7 +255,7 @@ public class BankingController {
             sendBanking.setMyaccin(addmoney);
             sendBanking.setMyaccout(0);
             sendBanking.setMysendacc(sendBanking.getMyacc());
-            sendBanking.setMyacc(banking2.getMyacc());
+            sendBanking.setMyacc(banking2.getMyaccDec());
             sendBanking.setMyaccmemo("");
             bankingMapper.addmoney(sendBanking);
             bankinghistMapper.insert(sendBanking);
@@ -289,21 +285,17 @@ public class BankingController {
                 model.addAttribute("msg", "조작하지 마세요.");
                 return "banking/alert";
             }
-            /* csrf secure
             else if (!detailHistory.getCsrfToken().equals(csrfToken)) {
                 model.addAttribute("msg", "조작하지 마세요.");
                 return "banking/alert";
             }
-            */
         }
-        /* csrf secure
         else {
             if (!detailHistory.getCsrfToken().equals(csrfToken)) {
                 model.addAttribute("msg", "조작하지 마세요.");
                 return "banking/alert";
             }
         }
-        */
 
         if (detailHistory.getKeyword() != null) {
             char[] ch3 = detailHistory.getKeyword().toCharArray();

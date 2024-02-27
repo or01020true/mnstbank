@@ -61,7 +61,7 @@
 	            <td style="vertical-align:middle; margin: 0 auto;" th:text="${accList[i].mybank}"></td>
 	            <td style="vertical-align:middle; margin: 0 auto;" th:text="${accList[i].myaccDec}"></td>
 				<td style="vertical-align:middle; margin: 0 auto;" th:text="${accList[i].myaccregdate}"></td>
-	            <td style="vertical-align:middle; margin: 0 auto;" th:text="${#dates.format(sendBankings[i].myaccdate)}"></td>
+	            <td style="vertical-align:middle; margin: 0 auto;" th:if="${sendBankings != null}" th:text="${#dates.format(sendBankings[i].myaccdate)}"></td>
 	            <td style="vertical-align:middle; margin: 0 auto;" th:text="${#numbers.formatInteger(accList[i].mymoney, 3, 'COMMA')}"></td>
 	            <td>
 	                <input type="button" class="btn btn-secondary form-label" onclick="sear()"

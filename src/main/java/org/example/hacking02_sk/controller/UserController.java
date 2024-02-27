@@ -221,7 +221,7 @@ public class UserController {
 			// 세션 만료
 			session.invalidate();
 			// JWT 쿠키 삭제
-			jwtUtil.removeToken(request.getCookies(), response);
+			// jwtUtil.removeToken(request.getCookies(), response);
 			mav.addObject("message", "로그아웃 하였습니다.");
 		}
 		mav.setViewName("/member/logout");
